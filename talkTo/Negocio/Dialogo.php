@@ -21,13 +21,25 @@ class Dialogo {
    }
 
    function criarDialogo() {
+       
    }
    
    function inserirMensagem($texto) {
+       try{
+            $pDAOnew = new ProxyDAO();
+            return $pDAOnew->inserirMensagem($texto);
+        }catch(Exception $erro){
+            print($erro->getMessage());
+        }
        
    }
    
    function colecaoMensagens() {
-       
+         try{
+            $pDAOnew = new ProxyDAO();
+            return $pDAOnew->colecaoMensagens();
+        }catch(Exception $erro){
+            print($erro->getMessage());
+        }
    }
 }
