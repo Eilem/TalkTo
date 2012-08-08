@@ -3,7 +3,7 @@
 class Dialogo {
    private $id;
    private $horaData;
-   
+
    public function getId() {
        return $this->id;
    }
@@ -21,23 +21,28 @@ class Dialogo {
    }
 
    function criarDialogo() {
-       
-   }
+       try {
+           $dao = new ProxyDAO();
+           return $dao->criarDialogo($this);
+       } catch (Exception $erro) {
+           print ($erro->getMessage());
+       }
+      }
    
-   function inserirMensagem($texto) {
+   function inserirMensagem(Mensagem $mensagem) {
        try{
-            $pDAOnew = new ProxyDAO();
-            return $pDAOnew->inserirMensagem($texto);
+            $DAOnew = new ProxyDAO();
+            return $DAOnew->inserirMensagem($mensagem);
         }catch(Exception $erro){
             print($erro->getMessage());
         }
        
    }
    
-   function colecaoMensagens() {
+   function colecaoMensagens($id) {
          try{
             $pDAOnew = new ProxyDAO();
-            return $pDAOnew->colecaoMensagens();
+            return $pDAOnew->colecaoMensagens($id);
         }catch(Exception $erro){
             print($erro->getMessage());
         }
