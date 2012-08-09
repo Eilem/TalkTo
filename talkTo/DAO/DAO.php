@@ -33,14 +33,9 @@ class DAO {
         
         
         while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
-            $colecao[] = $row["texto"]." | " . $row["dataHora"];
-           
-            
+            $colecao[$row["texto"]] = $row["dataHora"];
         }
-       
-        return $colecao;
-        
-       
-        
+     
+        return $colecao;   
    }
 }
