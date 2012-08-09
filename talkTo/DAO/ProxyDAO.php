@@ -2,6 +2,10 @@
 
 class ProxyDAO {
     
+    /**
+    * Cria o Dialogo enviando o objeto Dialogo 
+    * @return id do Dialogo 
+    */
    function criarDialogo(Dialogo $dialogo) {
        try{
            $dao = new DAO();
@@ -11,6 +15,11 @@ class ProxyDAO {
         }
    }
    
+   /**
+    * Inseri a Mensagem enviando o objeto Mensagem
+    * @param Mensagem $mensagem
+    * @return booleano 
+    */
    function inserirMensagem(Mensagem $mensagem) {
        try{
           $dao = new DAO();
@@ -20,6 +29,11 @@ class ProxyDAO {
         }
    }
    
+    /**
+    * Coleções Mensagens de um determinado Dialogo que foi passado pelo parametro $id
+    * @param int $id
+    * @return array de Mensagens
+    */
    function colecaoMensagens($id) {
        try{
            $dao = new DAO();

@@ -3,23 +3,43 @@
 class Dialogo {
    private $id;
    private $horaData;
-
+   
+   /**
+    * Obtem o Id do Dialogo
+    * @return int 
+    */
    public function getId() {
        return $this->id;
    }
-
+   
+   /**
+    * Define o id do Dialogo
+    * @param type $id 
+    */
    public function setId($id) {
        $this->id = $id;
    }
-
+   
+   /**
+    * Obtem o Hora e Data do Dialogo 
+    * @return date time 
+    */
    public function getHoraData() {
        return $this->horaData;
    }
-
+   
+   /**
+    * Define a Hora e Data do Dialogo
+    * @param type $horaData 
+    */
    public function setHoraData($horaData) {
        $this->horaData = $horaData;
    }
-
+   
+   /**
+    * Cria o Dialogo enviando o objeto Dialogo 
+    * @return id do Dialogo 
+    */
    function criarDialogo() {
        try {
            $dao = new ProxyDAO();
@@ -29,6 +49,11 @@ class Dialogo {
        }
       }
    
+   /**
+    * Inseri a Mensagem enviando o objeto Mensagem
+    * @param Mensagem $mensagem
+    * @return booleano 
+    */   
    function inserirMensagem(Mensagem $mensagem) {
        try{
             $DAOnew = new ProxyDAO();
@@ -39,6 +64,11 @@ class Dialogo {
        
    }
    
+   /**
+    * Coleções Mensagens de um determinado Dialogo que foi passado pelo parametro $id
+    * @param int $id
+    * @return array de Mensagens
+    */
    function colecaoMensagens($id) {
          try{
             $pDAOnew = new ProxyDAO();
