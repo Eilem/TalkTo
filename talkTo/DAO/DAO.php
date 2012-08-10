@@ -45,7 +45,13 @@ class DAO {
         $result = mysql_query("SELECT * FROM mensagem where idDialogo='$id'");
         
         while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
-            $colecao[$row["texto"]] = $row["dataHora"];
+            $mensagem = new Mensagem();
+            $mensagem->setId($row["id"]);
+            $mensagem->setIdDialogo($id);
+            $mensagem->setTexto($row["texto"]);
+            $mensagem->setDataHora($row["dataHora"]);
+//            $colecao[$row["texto"]] = $row["dataHora"];
+            $colecao = array($mensagem);
         }
         return $colecao;   
    }

@@ -35,7 +35,9 @@ while($i<=8){
     $i++;
 }
    $colecao = $dialogo->colecaoMensagens($mensagem->getIdDialogo());
-
-   foreach ($colecao as $key => $valor) {
-        echo $key." | ".$valor."<br/>";
-    }
+   
+   
+   var_dump($colecao);
+//   foreach ($colecao as $key => $valor) {
+//        echo $key." | ".$valor."<br/>";
+//    }
