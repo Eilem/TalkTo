@@ -51,7 +51,7 @@ class DAO {
             $mensagem->setTexto($row["texto"]);
             $mensagem->setDataHora($row["dataHora"]);
 //            $colecao[$row["texto"]] = $row["dataHora"];
-            $colecao = array($mensagem);
+            $colecao[] = array($mensagem);
         }
         return $colecao;   
    }
