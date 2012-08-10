@@ -9,8 +9,10 @@ class Mensagem {
     /**
      * Construtor da classe Mensagem 
      */
-    function __construct() {
-     
+    public function Mensagem($texto=NULL){
+     if(!is_null($texto)){
+         $this->setTexto($texto);
+     }
     }
     
     /**
@@ -77,8 +79,8 @@ class Mensagem {
         $this->dataHora = $dataHora;
     }
     
-    
+   public function __destruct() {
+       unset($this);
+   }
    
 }
-
-

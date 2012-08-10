@@ -1,0 +1,31 @@
+.index {
+    background-color: white;
+    color: gray;
+    margin-top: 200px;
+    text-align: center;
+}
+
+.formDialogo{
+    margin-top:100px;
+    border-color: #c1c1c1;
+    text-align: center;
+}
+
+textarea{
+    width: 600px;
+    height: 300px;
+}
+
+#texto{
+    width: 600px;
+    height: 50px;
+    text-align: auto;
+}
+
+.sair{
+    text-align: center;
+}
+
+body{
+    background-color: aliceblue;
+}
