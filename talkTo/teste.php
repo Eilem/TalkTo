@@ -12,9 +12,6 @@ $mensagem = new Mensagem();
 $dialogo->setId(null);
 $dialogo->setHoraData(time());
 
-$dialogo->criarDialogo($dialogo);
-
-
     $texto[]="um";
     $texto[]="dois";
     $texto[]="tres";
@@ -27,20 +24,19 @@ $dialogo->criarDialogo($dialogo);
 
 $i=0;    
 while($i<=8){
+    $mensagem = new Mensagem();
     $mensagem->setId(null);
     $mensagem->setIdDialogo($dialogo->getId());
     $mensagem->setTexto($texto[$i]);
     $mensagem->setDataHora(time());
-    
     $dialogo->setCMensagens($mensagem);
     
     $i++;
 }
 
-$dialogo->persistir();
+   $dialogo->persistir();
 
    $colecao = $dialogo->colecaoMensagens($mensagem->getIdDialogo());
-  
    
    foreach ($colecao as $mensagem){
        echo $mensagem->getTexto()." | ".date("d/m/y h:i:s",$mensagem->getDataHora())."<br/>";

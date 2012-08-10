@@ -11,14 +11,14 @@ class DAO {
        try{
                 $id = $oDialogo->getId();
                 $dataHor = $oDialogo->getHoraData();  
-                $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor');");
+                $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor'); ");
      
                 if($result){
                     $oDialogo->setId(mysql_insert_id());
                     
                     $cMensagens = $oDialogo->getCMensagens();
-                    
                     foreach ($cMensagens as $oMensagem) {
+                        $oMensagem->setIdDialogo($oDialogo->getId());
                         $result = $this->persistirMensagem($oMensagem);  
                     }
                     return $result;
@@ -71,22 +71,16 @@ class DAO {
          
         $result = mysql_query("SELECT * FROM mensagem where idDialogo='$id'");
         
-        
-        
-        if($result){
+        if($result){      
               while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
                     $mensagem = new Mensagem();
                     $mensagem->setId($row["id"]);
                     $mensagem->setIdDialogo($id);
                     $mensagem->setTexto($row["texto"]);
                     $mensagem->setDataHora($row["dataHora"]);
-                       
-                    
-                var_dump($mensagem);
                     $colecao[] = $mensagem;
                 }
-        die();
-            return $colecao;
+                return $colecao;
            }
         else{
             return false;
