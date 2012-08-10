@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("Brazil/East");
 
 require_once(dirname(__FILE__) . '/DAO/DAO.php');
 require_once(dirname(__FILE__) . '/DAO/ProxyDAO.php');
@@ -9,7 +10,7 @@ $dialogo = new Dialogo();
 $mensagem = new Mensagem();
 
 $dialogo->setId(null);
-$dialogo->setHoraData(date("d/m/y")." ".date("H:i:s"));
+$dialogo->setHoraData(time());
 
 $dialogo->criarDialogo($dialogo);
 
@@ -29,15 +30,14 @@ while($i<=8){
     $mensagem->setId(null);
     $mensagem->setIdDialogo($dialogo->getId());
     $mensagem->setTexto($texto[$i]);
-    $mensagem->setDataHora(date("d/m/y")." ".date("H:i:s"));
+    $mensagem->setDataHora(time());
     
-    $dialogo->inserirMensagem($mensagem);
+    $dialogo->persistirMensagem($mensagem);
     $i++;
 }
    $colecao = $dialogo->colecaoMensagens($mensagem->getIdDialogo());
+  
    
-   
-   var_dump($colecao);
-//   foreach ($colecao as $key => $valor) {
-//        echo $key." | ".$valor."<br/>";
-//    }
+   foreach ($colecao as $mensagem){
+       echo $mensagem->getTexto()." | ".date("d/m/y h:i:s",$mensagem->getDataHora())."<br/>";
+   }

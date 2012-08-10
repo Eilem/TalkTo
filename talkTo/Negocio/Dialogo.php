@@ -54,10 +54,10 @@ class Dialogo {
     * @param Mensagem $mensagem
     * @return booleano 
     */   
-   function inserirMensagem(Mensagem $mensagem) {
+   function persistirMensagem(Mensagem $mensagem) {
        try{
             $DAOnew = new ProxyDAO();
-            return $DAOnew->inserirMensagem($mensagem);
+            return $DAOnew->persistirMensagem($mensagem);
         }catch(Exception $erro){
             print($erro->getMessage());
         }
@@ -70,17 +70,8 @@ class Dialogo {
     */
    function colecaoMensagens() {
          try{
-        //    $pDAOnew = new ProxyDAO();
-        //    return $pDAOnew->colecaoMensagens($this->getId());
-            
-            return array(
-                new Mensagem("REcebendo msg"),
-                new Mensagem("hi how are you?"),
-                new Mensagem("i'm good!!")
-                
-            );
-            
-            
+            $pDAOnew = new ProxyDAO();
+            return $pDAOnew->colecaoMensagens($this->getId());
         }catch(Exception $erro){
             print($erro->getMessage());
         }

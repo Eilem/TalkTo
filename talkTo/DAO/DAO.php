@@ -6,16 +6,23 @@ class DAO {
     * Cria o Dialogo inserindo no BD o objeto Dialogo 
     * @return id do Dialogo 
     */ 
-   function criarDialogo(Dialogo &$dialogo) {
-       include("conectar.php");
+   public function criarDialogo(Dialogo &$dialogo) {
+       try{
+           include("conectar.php");
        
-       $id = $dialogo->getId();
-       $dataHor = $dialogo->getHoraData();  
-       mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor');")or die(mysql_error());
+                $id = $dialogo->getId();
+                $dataHor = $dialogo->getHoraData();  
+                $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor');");
      
-       $dialogo->setId(mysql_insert_id());
-       
-       return true;
+                if($result){
+                    return $dialogo->setId(mysql_insert_id());
+                }
+                else{
+                    return false;
+                }
+        }catch(Exception $erro){
+            print($erro->getMessage());
+        }     
    }
    
    /**
@@ -23,36 +30,56 @@ class DAO {
     * @param Mensagem $mensagem
     * @return booleano 
     */
-   function inserirMensagem(Mensagem $mensagem) {     
-       include("conectar.php");
+   public function persistirMensagem(Mensagem &$mensagem) {  
+    try{
+           include("conectar.php");
        
        $id = $mensagem->getId();
        $idDialogo = $mensagem->getIdDialogo();
        $texto = $mensagem->getTexto();
        $dataHora = $mensagem->getDataHora();
 
-       mysql_query("INSERT INTO mensagem (id, idDialogo, texto, dataHora) VALUES ('$id', '$idDialogo','$texto', '$dataHora')")or die(mysql_error()); 
+           $result = mysql_query("INSERT INTO mensagem (id, idDialogo, texto, dataHora) VALUES ('$id', '$idDialogo','$texto', '$dataHora')"); 
+           
+           if($result){
+                return $mensagem->setId(mysql_insert_id());
+           }
+           else{
+                return false;
+               
+           }
+        }catch(Exception $erro){
+            print($erro->getMessage());
+        }
    }
+       
+   
    
      /**
     * Coleções Mensagens de um determinado Dialogo que foi passado pelo parametro $id
     * @param int $id
     * @return array de Mensagens
     */
-   function colecaoMensagens($id) {           
+   public function colecaoMensagens($id) {     
+       try{
          include("conectar.php"); 
          
         $result = mysql_query("SELECT * FROM mensagem where idDialogo='$id'");
         
         while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
+            //            $colecao[$row["texto"]] = $row["dataHora"];
+            
             $mensagem = new Mensagem();
             $mensagem->setId($row["id"]);
             $mensagem->setIdDialogo($id);
             $mensagem->setTexto($row["texto"]);
             $mensagem->setDataHora($row["dataHora"]);
-//            $colecao[$row["texto"]] = $row["dataHora"];
-            $colecao[] = array($mensagem);
+
+            $colecao[] = $mensagem;
         }
-        return $colecao;   
+            return $colecao;   
+        }catch(Exception $erro){
+            print($erro->getMessage());
+        }
    }
 }
