@@ -15,7 +15,7 @@ CREATE  TABLE IF NOT EXISTS `talkto`.`dialogo` (
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET =utf8;
 
 
 -- -----------------------------------------------------
@@ -31,7 +31,7 @@ CREATE  TABLE IF NOT EXISTS `talkto`.`mensagem` (
   INDEX `fk_mensagem_dialogo` (`idDialogo` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 1260
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET =utf8;
 
 
 
