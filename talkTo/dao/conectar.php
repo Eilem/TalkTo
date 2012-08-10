@@ -7,7 +7,7 @@ $servidor = "localhost";
 $user = "root";
  
 //senha do banco de dados
-$senha = "";
+$senha = "admin";
  
 //nome da base de dados
 $db = "talkto";

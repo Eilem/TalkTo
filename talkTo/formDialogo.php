@@ -3,10 +3,19 @@
         <title>Talk To</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="estilo.css">
+        <script type="text/javascript"> 
+            function validaMensagem(nomeform)
+            {
+                if(nomeform.mensagem ==""){
+                    alert("Digite uma mensagem para enviar!");
+                    return FALSE;
+                }
+            }
+        </script>
     </head>
     <body>
-        <form method="POST" action="controleDialogo.php" title="Clique aqui para enviar a Mensagem" class="formDialogo">
-            Você esta no Talker To
+        <form method="POST" action="controleDialogo.php" title="Clique aqui para enviar a Mensagem" class="formDialogo" onSubmit="return validaMensagem(formDialogo)">
+            <p class="texto"> Você esta no Talker To! <p/>
             <div>
                 <textarea name="mensagens">
                   <?php
