@@ -10,9 +10,9 @@ try{
             $oMensagem= new Mensagem(); //criando msg
             $oMensagem->setTexto($mensagem);
             
-            $oDialogo->inserirMensagem($oMensagem);
+            $oDialogo->setCMensagens($oMensagem);
             
-            $oDialogo->criarDialogo();
+            $oDialogo->persistir();
             $oMensagem->__destruct();
             
             $cMensagens = $oDialogo->colecaoMensagens();

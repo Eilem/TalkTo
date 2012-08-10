@@ -32,9 +32,13 @@ while($i<=8){
     $mensagem->setTexto($texto[$i]);
     $mensagem->setDataHora(time());
     
-    $dialogo->persistirMensagem($mensagem);
+    $dialogo->setCMensagens($mensagem);
+    
     $i++;
 }
+
+$dialogo->persistir();
+
    $colecao = $dialogo->colecaoMensagens($mensagem->getIdDialogo());
   
    

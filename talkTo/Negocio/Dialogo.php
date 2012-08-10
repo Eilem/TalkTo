@@ -3,8 +3,9 @@
 class Dialogo {
    private $id;
    private $horaData;
+   private $cMensagens=array();
    
-   /**
+    /**
     * Obtem o Id do Dialogo
     * @return int 
     */
@@ -36,14 +37,22 @@ class Dialogo {
        $this->horaData = $horaData;
    }
    
+   public function getCMensagens() {
+       return $this->cMensagens;
+   }
+
+   public function setCMensagens(Mensagem $oMensagens) {
+       $this->cMensagens[] = $oMensagens;
+   }
+   
    /**
     * Cria o Dialogo enviando o objeto Dialogo 
     * @return id do Dialogo 
     */
-   function criarDialogo() {
+   function persistir() {
        try {
            $dao = new ProxyDAO();
-           return $dao->criarDialogo($this);
+           return $dao->persistirDialogo($this);
        } catch (Exception $erro) {
            print ($erro->getMessage());
        }

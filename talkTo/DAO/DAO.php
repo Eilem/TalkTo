@@ -1,4 +1,5 @@
 <?php
+include("conectar.php");
 
 class DAO {
     
@@ -6,16 +7,21 @@ class DAO {
     * Cria o Dialogo inserindo no BD o objeto Dialogo 
     * @return id do Dialogo 
     */ 
-   public function criarDialogo(Dialogo &$dialogo) {
+   public function persistirDialogo(Dialogo &$oDialogo) {
        try{
-           include("conectar.php");
-       
-                $id = $dialogo->getId();
-                $dataHor = $dialogo->getHoraData();  
+                $id = $oDialogo->getId();
+                $dataHor = $oDialogo->getHoraData();  
                 $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor');");
      
                 if($result){
-                    return $dialogo->setId(mysql_insert_id());
+                    $oDialogo->setId(mysql_insert_id());
+                    
+                    $cMensagens = $oDialogo->getCMensagens();
+                    
+                    foreach ($cMensagens as $oMensagem) {
+                        $result = $this->persistirMensagem($oMensagem);  
+                    }
+                    return $result;
                 }
                 else{
                     return false;
@@ -32,7 +38,6 @@ class DAO {
     */
    public function persistirMensagem(Mensagem &$mensagem) {  
     try{
-           include("conectar.php");
        
        $id = $mensagem->getId();
        $idDialogo = $mensagem->getIdDialogo();
@@ -42,7 +47,8 @@ class DAO {
            $result = mysql_query("INSERT INTO mensagem (id, idDialogo, texto, dataHora) VALUES ('$id', '$idDialogo','$texto', '$dataHora')"); 
            
            if($result){
-                return $mensagem->setId(mysql_insert_id());
+                $mensagem->setId(mysql_insert_id());
+                return true;
            }
            else{
                 return false;
@@ -62,22 +68,30 @@ class DAO {
     */
    public function colecaoMensagens($id) {     
        try{
-         include("conectar.php"); 
          
         $result = mysql_query("SELECT * FROM mensagem where idDialogo='$id'");
         
-        while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
-            //            $colecao[$row["texto"]] = $row["dataHora"];
-            
-            $mensagem = new Mensagem();
-            $mensagem->setId($row["id"]);
-            $mensagem->setIdDialogo($id);
-            $mensagem->setTexto($row["texto"]);
-            $mensagem->setDataHora($row["dataHora"]);
-
-            $colecao[] = $mensagem;
+        
+        
+        if($result){
+              while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
+                    $mensagem = new Mensagem();
+                    $mensagem->setId($row["id"]);
+                    $mensagem->setIdDialogo($id);
+                    $mensagem->setTexto($row["texto"]);
+                    $mensagem->setDataHora($row["dataHora"]);
+                       
+                    
+                var_dump($mensagem);
+                    $colecao[] = $mensagem;
+                }
+        die();
+            return $colecao;
+           }
+        else{
+            return false;
+               
         }
-            return $colecao;   
         }catch(Exception $erro){
             print($erro->getMessage());
         }
