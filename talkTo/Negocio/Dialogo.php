@@ -66,13 +66,21 @@ class Dialogo {
    
    /**
     * Coleções Mensagens de um determinado Dialogo que foi passado pelo parametro $id
-    * @param int $id
     * @return array de Mensagens
     */
-   function colecaoMensagens($id) {
+   function colecaoMensagens() {
          try{
-            $pDAOnew = new ProxyDAO();
-            return $pDAOnew->colecaoMensagens($id);
+        //    $pDAOnew = new ProxyDAO();
+        //    return $pDAOnew->colecaoMensagens($this->getId());
+            
+            return array(
+                new Mensagem("REcebendo msg"),
+                new Mensagem("hi how are you?"),
+                new Mensagem("i'm good!!")
+                
+            );
+            
+            
         }catch(Exception $erro){
             print($erro->getMessage());
         }

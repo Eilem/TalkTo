@@ -8,7 +8,13 @@
         <form method="POST" action="controleDialogo.php" title="Clique aqui para enviar a Mensagem" class="formDialogo">
             Você esta no Talker To
             <div>
-                <textarea name="mensagens"></textarea>
+                <textarea name="mensagens">
+                  <?php
+                  if(isset($dialogo)){
+                      echo($dialogo);
+                  }
+                  ?>
+                </textarea>
             </div>
             <br/>
             <div>
