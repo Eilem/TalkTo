@@ -6,10 +6,10 @@ class ProxyDAO {
     * Cria o Dialogo enviando o objeto Dialogo 
     * @return id do Dialogo 
     */
-   public function criarDialogo(Dialogo $dialogo) {
+   public function persistirDialogo(Dialogo $oDialogo) {
        try{
            $dao = new DAO();
-           return $dao->criarDialogo($dialogo); 
+           return $dao->persistirDialogo($oDialogo); 
         }catch(Exception $erro){
             print($erro->getMessage());
         }
