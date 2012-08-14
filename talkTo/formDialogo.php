@@ -18,6 +18,9 @@
             <h3>Você esta no Talker To!<h3/>
             <br/>
             <div>
+                <input type="hidden" name="id" value="<?php if(isset($id)) echo ($id);?>"/>
+            </div>
+            <div>
                 <textarea name="mensagens">
                   <?php
                   if(isset($dialogo)){
