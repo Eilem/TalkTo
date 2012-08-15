@@ -29,7 +29,8 @@ require_once("bootstrap.php");
                
                 $dialogo="";
                 foreach($cMensagens as $oMensagem){
-                    $dialogo.=$oMensagem->getTexto()."<br/>";
+                    $dialogo.=$oMensagem->getTexto();
+                    echo("<br/>");
                     }
                 
             require_once("formdialogo.php");

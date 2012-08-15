@@ -1,7 +1,7 @@
 <?php
 
 //nome do servidor (localhost)
-$servidor = "dbmy0062.servidor.com.br";
+$servidor = "dbmy0062.whservidor.com";
  
 //usuário do banco de dados
 $user = "linkurbano_3";

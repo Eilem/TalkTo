@@ -2,36 +2,37 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
-CREATE SCHEMA IF NOT EXISTS `talkto` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `talkto` ;
+-- CREATE SCHEMA IF NOT EXISTS `linkurbano_3` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `linkurbano_3` ;
 
 -- -----------------------------------------------------
--- Table `talkto`.`dialogo`
+-- Table `linkurbano_3`.`dialogo`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `talkto`.`dialogo` (
+CREATE  TABLE IF NOT EXISTS `linkurbano_3`.`dialogo` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `horaData` BIGINT(20) NOT NULL ,
+  `horaData` BIGINT(20)  NOT NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
 AUTO_INCREMENT = 0
-DEFAULT CHARACTER SET =utf8;
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 
 -- -----------------------------------------------------
--- Table `talkto`.`mensagem`
+-- Table `linkurbano_3`.`mensagem`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `talkto`.`mensagem` (
+CREATE  TABLE IF NOT EXISTS `linkurbano_3`.`mensagem` (
   `id` INT(11) NOT NULL AUTO_INCREMENT ,
   `idDialogo` INT(11) NOT NULL ,
   `texto` VARCHAR(100) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NOT NULL ,
-  `dataHora` BIGINT(20) NOT NULL ,
+  `dataHora` BIGINT(20)  NOT NULL ,
   PRIMARY KEY (`id`) ,
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
-  INDEX `fk_mensagem_dialogo` (`idDialogo` ASC) )
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB
-AUTO_INCREMENT = 1260
-DEFAULT CHARACTER SET =utf8;
+AUTO_INCREMENT = 0
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
 
 
 
