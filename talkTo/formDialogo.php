@@ -21,7 +21,7 @@
                 <input type="hidden" name="id" value="<?php if(isset($id)) echo ($id);?>"/>
             </div>
             <div>
-                <textarea name="mensagens">
+                <textarea name="mensagens" readonly>
                   <?php               
                   if(isset($dialogo)){
                        echo $dialogo;
