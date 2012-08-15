@@ -1,16 +1,16 @@
 <?php
 
 //nome do servidor (localhost)
-$servidor = "localhost";
+$servidor = "dbmy0062.servidor.com.br";
  
 //usuário do banco de dados
-$user = "root";
+$user = "linkurbano_3";
  
 //senha do banco de dados
-$senha = "";
+$senha = "t4lk3r";
  
 //nome da base de dados
-$db = "talkto";
+$db = "linkurbano_3";
  
 //executa a conexão com o banco, caso contrário mostra o erro ocorrido
 $conexao = mysql_connect($servidor,$user,$senha) or die (mysql_error());
