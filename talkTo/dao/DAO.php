@@ -10,22 +10,17 @@ class DAO {
    public function persistirDialogo(Dialogo &$oDialogo) {
        try{
                 $id = $oDialogo->getId();
-                $dataHor = $oDialogo->getHoraData();  
-                $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor'); ");
-     
-                if($result){
+                if(is_null($id)){
+                    $dataHor = $oDialogo->getHoraData();  
+                    $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor'); ");
                     $oDialogo->setId(mysql_insert_id());
                     
-                    $cMensagens = $oDialogo->getCMensagens();
-                    foreach ($cMensagens as $oMensagem) {
-                        $oMensagem->setIdDialogo($oDialogo->getId());
-                        $result = $this->persistirMensagem($oMensagem);  
-                    }
-                    return $result;
                 }
-                else{
-                    return false;
-                }
+                $e = $oDialogo->getCMensagens();
+                $oMensagem = $e[count($e)-1];
+                $oMensagem->setIdDialogo($oDialogo->getId());
+                $result = $this->persistirMensagem($oMensagem);
+              
         }catch(Exception $erro){
             print($erro->getMessage());
         }     

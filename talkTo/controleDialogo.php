@@ -2,6 +2,9 @@
 require_once("bootstrap.php");
 
     try{
+        var_dump($_POST['mensagem']);
+        
+        var_dump($_POST['idDialogo']);
         if(!empty($_POST)){
             if(!empty($_POST['mensagem'])){
                 $mensagem = $_POST['mensagem']; 
@@ -10,7 +13,7 @@ require_once("bootstrap.php");
                     
                      $oTalker = new Talker();
                      $oDialogo = $oTalker->obterDialogo($_POST['idDialogo']);
-                   
+                     
                 }else{
                     $oDialogo = new Dialogo(); // criando Dialogo
                     $oDialogo->setId(null);
@@ -22,9 +25,9 @@ require_once("bootstrap.php");
                 $oMensagem->setIdDialogo($oDialogo->getId());
                 $oMensagem->setTexto($mensagem);
                 $oMensagem->setDataHora(time());
+                
                 $oDialogo->setCMensagens($oMensagem);
-                
-                
+                var_dump($oDialogo);
                 $oDialogo->persistir();
                 
                 $id = $oDialogo->getId();
@@ -36,7 +39,7 @@ require_once("bootstrap.php");
                 $dialogo="";
                 foreach($cMensagens as $oMensagem){
                          $dialogo.=$oMensagem->getTexto();
-                    }
+                }
                     
             require_once("formdialogo.php");
             }else{

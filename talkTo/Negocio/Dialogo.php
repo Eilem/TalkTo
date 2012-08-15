@@ -11,7 +11,8 @@ class Dialogo {
     */
    public function getId() {
        return $this->id;
-   }
+       
+       }
    
    /**
     * Define o id do Dialogo
@@ -42,9 +43,9 @@ class Dialogo {
    }
 
    public function setCMensagens(Mensagem $oMensagens) {
-       $this->cMensagens[] = $oMensagens;
+       $this->cMensagens[count($this->cMensagens)] = $oMensagens;
    }
-   
+          
    /**
     * Cria o Dialogo enviando o objeto Dialogo 
     * @return id do Dialogo 
