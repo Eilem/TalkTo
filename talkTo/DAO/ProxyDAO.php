@@ -43,4 +43,13 @@ class ProxyDAO {
         }
    }
    
+    function obterDialogo($id){
+         try{
+           $dao = new DAO();
+           return $dao->obterDialogo($id);
+        }catch(Exception $erro){
+            print($erro->getMessage());
+        }
+    }
+   
 }

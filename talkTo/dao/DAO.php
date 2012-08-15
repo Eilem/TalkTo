@@ -68,7 +68,6 @@ class DAO {
        try{
          
         $result = mysql_query("SELECT * FROM mensagem where idDialogo='$id'");
-        
         if($result){      
               while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
                     $mensagem = new Mensagem();
@@ -87,5 +86,25 @@ class DAO {
         }catch(Exception $erro){
             print($erro->getMessage());
         }
+   }
+   
+   function obterDialogo($id){
+       try{
+           $result = mysql_query("SELECT * FROM dialogo where id={$id}");
+           $result = mysql_fetch_array($result,MYSQLI_ASSOC);
+           $oDialogo = new Dialogo();
+           $oDialogo->setId($result["id"]);
+           $oDialogo->setHoraData($result["horaData"]);
+           $result = $this->colecaoMensagens($id);
+           foreach ($result as $mensagem){
+               $oDialogo->setCMensagens($mensagem);
+           }
+           
+           return $oDialogo;
+       }  catch (Exception $erro){
+           print($erro->getMessage());
+           
+       }
+        
    }
 }

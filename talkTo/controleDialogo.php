@@ -5,9 +5,17 @@ require_once("bootstrap.php");
         if(!empty($_POST)){
             if(!empty($_POST['mensagem'])){
                 $mensagem = $_POST['mensagem']; 
-                $oDialogo = new Dialogo(); // criando Dialogo
-                $oDialogo->setId(null);
-                $oDialogo->setHoraData(time());
+                
+                if(!empty($_POST['idDialogo'])){
+                    
+                     $oTalker = new Talker();
+                     $oDialogo = $oTalker->obterDialogo($_POST['idDialogo']);
+                   
+                }else{
+                    $oDialogo = new Dialogo(); // criando Dialogo
+                    $oDialogo->setId(null);
+                    $oDialogo->setHoraData(time());
+                }
                 
                 $oMensagem= new Mensagem(); //criando msg
                 $oMensagem->setId(null);
@@ -16,23 +24,20 @@ require_once("bootstrap.php");
                 $oMensagem->setDataHora(time());
                 $oDialogo->setCMensagens($oMensagem);
                 
-                if(!empty($_POST['id'])){
-                    $oDialogo->setId($_POST['id']);
-                    $id=$oDialogo->getId();
-                }
-
+                
                 $oDialogo->persistir();
+                
+                $id = $oDialogo->getId();
 
                 $oMensagem->__destruct();
 
-                $cMensagens = $oDialogo->colecaoMensagens();
+                $cMensagens = $oDialogo->getCMensagens();
                
                 $dialogo="";
                 foreach($cMensagens as $oMensagem){
-                    $dialogo.=$oMensagem->getTexto();
-                    echo("<br/>");
+                         $dialogo.=$oMensagem->getTexto();
                     }
-                
+                    
             require_once("formdialogo.php");
             }else{
                 throw new Exception("Digite uma mensagem para enviar!");
