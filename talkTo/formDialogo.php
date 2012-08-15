@@ -22,9 +22,9 @@
             </div>
             <div>
                 <textarea name="mensagens">
-                  <?php
+                  <?php               
                   if(isset($dialogo)){
-                      echo($dialogo);
+                       echo $dialogo;
                   }
                   ?>
                 </textarea>
