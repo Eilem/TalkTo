@@ -36,14 +36,9 @@ require_once("bootstrap.php");
                 $dialogo="";
                 $time="";
                 foreach($cMensagens as $oMensagem){
-                    
-                   $time = date('Y-m-d H:i:s',$oMensagem->getDataHora());           
-                   $dialogo.=$oMensagem->getTexto()."\n";
-                   
-              //     $print = $time.$dialogo."\n";
-                   
+                   $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";                   
                 }
-                    
+                
             require_once("formdialogo.php");
             }else{
                 throw new Exception("Digite uma mensagem para enviar!");

@@ -24,7 +24,6 @@
                 <textarea name="mensagens" readonly>
                   <?php               
                   if(isset($dialogo)){
-                      echo $time;
                       echo $dialogo;
                   }
                   ?>
