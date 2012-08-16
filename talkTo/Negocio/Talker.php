@@ -6,7 +6,7 @@ class Talker {
             $pDAOnew = new ProxyDAO();
             return $pDAOnew->obterDialogo($id);
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
         
     }

@@ -11,7 +11,7 @@ class ProxyDAO {
            $dao = new DAO();
            return $dao->persistirDialogo($oDialogo); 
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
    }
    
@@ -25,7 +25,7 @@ class ProxyDAO {
           $dao = new DAO();
           return $dao->persistirMensagem($mensagem);
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
    }
    
@@ -39,7 +39,7 @@ class ProxyDAO {
            $dao = new DAO();
            return $dao->colecaoMensagens($id);
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
    }
    
@@ -48,7 +48,7 @@ class ProxyDAO {
            $dao = new DAO();
            return $dao->obterDialogo($id);
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
     }
    

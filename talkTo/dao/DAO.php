@@ -11,8 +11,8 @@ class DAO {
        try{
                 $id = $oDialogo->getId();
                 if(is_null($id)){
-                    $dataHor = $oDialogo->getHoraData();  
-                    $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHor'); ");
+                    $dataHora = $oDialogo->getHoraData();  
+                    $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHora'); ");
                     $oDialogo->setId(mysql_insert_id());
                     
                 }
@@ -22,7 +22,7 @@ class DAO {
                 $result = $this->persistirMensagem($oMensagem);
               
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }     
    }
    
@@ -43,14 +43,14 @@ class DAO {
            
            if($result){
                 $mensagem->setId(mysql_insert_id());
-                return true;
+                return TRUE;
            }
            else{
-                return false;
+                return FALSE;
                
            }
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
    }
 
@@ -75,11 +75,11 @@ class DAO {
                 return $colecao;
            }
         else{
-            return false;
+            return FALSE;
                
         }
         }catch(Exception $erro){
-            print($erro->getMessage());
+            echo($erro->getMessage());
         }
    }
    
@@ -97,7 +97,7 @@ class DAO {
            
            return $oDialogo;
        }  catch (Exception $erro){
-           print($erro->getMessage());
+           echo($erro->getMessage());
            
        }
         
