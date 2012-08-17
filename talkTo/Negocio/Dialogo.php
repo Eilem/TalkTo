@@ -4,6 +4,9 @@ class Dialogo {
    private $id;
    private $horaData;
    private $cMensagens=array();
+   private $status;
+   private $talker1;
+   private $talker2;
    
     /**
     * Obtem o Id do Dialogo
@@ -45,7 +48,32 @@ class Dialogo {
    public function setCMensagens(Mensagem $oMensagens) {
        $this->cMensagens[count($this->cMensagens)] = $oMensagens;
    }
-          
+   
+   public function getStatus() {
+       return $this->status;
+   }
+
+   public function setStatus($status) {
+       $this->status = $status;
+   }
+
+   public function getTalker1() {
+       return $this->talker1;
+   }
+
+   public function setTalker1($talker1) {
+       $this->talker1 = $talker1;
+   }
+
+   public function getTalker2() {
+       return $this->talker2;
+   }
+
+   public function setTalker2($talker2) {
+       $this->talker2 = $talker2;
+   }
+
+             
    /**
     * Cria o Dialogo enviando o objeto Dialogo 
     * @return id do Dialogo 
