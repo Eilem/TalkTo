@@ -71,5 +71,15 @@ class Usuario{
         $this->logado = $logado;
     }
 
+    public function validarUsuario(Usuario $oUsuario){
+        try{
+        
+            $oProxyDAO = new ProxyDAO();
+            $oProxyDAO->validarUsuario();
+            
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+    }
 
 }

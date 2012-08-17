@@ -111,6 +111,7 @@ class DAO {
                       
            $sql = mysql_query("SELECT * FROM user where user={$user} and password={$password}");
            
+           
        }catch(Exception $erro){
            echo($erro->getMessage());
        }
