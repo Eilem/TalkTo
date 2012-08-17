@@ -100,6 +100,19 @@ class DAO {
            echo($erro->getMessage());
            
        }
-        
+   }
+   
+   
+   function logar(Usuario &$oUsuario){
+       try{
+           
+           $user = $oUsuario->getUsername();
+           $password= $oUsuario->getPassword();
+                      
+           $sql = mysql_query("SELECT * FROM user where user={$user} and password={$password}");
+           
+       }catch(Exception $erro){
+           echo($erro->getMessage());
+       }
    }
 }
