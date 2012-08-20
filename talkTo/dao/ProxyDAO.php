@@ -61,7 +61,7 @@ class ProxyDAO {
         
     }
     
-    public function obterDialogoDeTalkers($talker1,$talker2){
+    public function obterDialogosDeTalkers($talker1,$talker2){
          try{
            $oDao = new DAO();
            return $oDao->obterDialogoDeTalkers($talker1,$talker2);

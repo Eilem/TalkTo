@@ -117,22 +117,30 @@ class DAO {
            $user = $oUsuario->getUsername();
            $password= $oUsuario->getPassword();
                       
-           $sql = mysql_query("SELECT * FROM user where user={$user} and password={$password}");
-           
+           $result = mysql_query("SELECT * FROM user where user={$user} and password={$password}");
+           $result = mysql_fetch_array($result,MYSQLI_ASSOC);
            
        }catch(Exception $erro){
            echo($erro->getMessage());
        }
    }
    
+   
    public function obterDialogosDeTalkers($talker1,$talker2){
        try{
+           $result = mysql_query("SELECT * FROM dialogo where talker1={$talker1} and talker2={$talker2}");
+           $result = mysql_fetch_array($result,MYSQLI_ASSOC);
            
+           $idDialogo = $result['id'];
+           
+           var_dump($idDialogo);
+           
+           return $idDialogo;
+                     
            
            }catch(Exception $erro){
                $erro->getMessage();
            }
-       
    }
    
 }
