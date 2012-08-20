@@ -1,43 +1,48 @@
 <?php
-date_default_timezone_set("Brazil/East");
+require_once("bootstrap.php");
 
-require_once(dirname(__FILE__) . '/DAO/DAO.php');
-require_once(dirname(__FILE__) . '/DAO/ProxyDAO.php');
-require_once(dirname(__FILE__) . '/Negocio/Dialogo.php');
-require_once(dirname(__FILE__) . '/Negocio/Mensagem.php');
+    try{
+        if(!empty($_GET)){
+            if(!empty($_GET['mensagem'])){
+                $mensagem = $_GET['mensagem']; 
+                
+                if(!empty($_GET['idDialogo'])){
+                    
+                     $oTalker = new Talker();
+                     $oDialogo = $oTalker->obterDialogo($_GET['idDialogo']);
+                     
+                }else{
+                    $oDialogo = new Dialogo(); // criando Dialogo
+                    $oDialogo->setId(null);
+                    $oDialogo->setHoraData(time());
+                }
+                
+                $oMensagem= new Mensagem(); //criando msg
+                $oMensagem->setId(null);
+                $oMensagem->setIdDialogo($oDialogo->getId());
+                $oMensagem->setTexto($mensagem);
+                $oMensagem->setDataHora(time());
+                
+                $oDialogo->setCMensagens($oMensagem);
+                
+                $oDialogo->persistir();
+                $id="";
+                $id = $oDialogo->getId();
 
-$dialogo = new Dialogo();
-$mensagem = new Mensagem();
+                $oMensagem->__destruct();
 
-$dialogo->setId(null);
-$dialogo->setHoraData(time());
-
-    $texto[]="um";
-    $texto[]="dois";
-    $texto[]="tres";
-    $texto[]="quatro";
-    $texto[]="cinco";
-    $texto[]="seis";
-    $texto[]="sete";
-    $texto[]="oito";
-    $texto[]="nove";
-
-$i=0;    
-while($i<=8){
-    $mensagem = new Mensagem();
-    $mensagem->setId(null);
-    $mensagem->setIdDialogo($dialogo->getId());
-    $mensagem->setTexto($texto[$i]);
-    $mensagem->setDataHora(time());
-    $dialogo->setCMensagens($mensagem);
-    
-    $i++;
-}
-
-   $dialogo->persistir();
-
-   $colecao = $dialogo->colecaoMensagens($mensagem->getIdDialogo());
-   
-   foreach ($colecao as $mensagem){
-       echo $mensagem->getTexto()." | ".date("d/m/y h:i:s",$mensagem->getDataHora())."<br/>";
-   }
+                $cMensagens = $oDialogo->getCMensagens();
+               
+                $dialogo="";
+                foreach($cMensagens as $oMensagem){
+                   $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";                   
+                }
+                
+            require_once("formdialogo.php");
+            }else{
+                throw new Exception("Digite uma mensagem para enviar!");
+            }
+        }
+    }catch(Exception $erro){
+        echo($erro->getMessage());
+    }
