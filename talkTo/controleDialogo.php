@@ -20,10 +20,10 @@ $dialogo="";
                 if(!empty($_POST['idDialogo'])){                    
                                       
                      $oTalker = new Talker();
-                     
+
                      $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                      $oDialogo = $oTalker->obterDialogo($id);
-                     
+
                      if($oDialogo->getStatus()){
                          foreach($oDialogo->getCMensagens() as $oMensagem){
                              $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";

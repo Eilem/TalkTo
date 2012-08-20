@@ -131,11 +131,15 @@ class DAO {
            $result = mysql_query("SELECT * FROM dialogo where talker1={$talker1} and talker2={$talker2} and status=1");
            $result = mysql_fetch_array($result,MYSQLI_ASSOC);
            
+
            $result = $this->colecaoMensagens($id);
            
            foreach ($result as $mensagem){
             $oDialogo->setCMensagens($mensagem);
             }
+            
+           $idDialogo = $result['id'];
+           
            return $idDialogo;
             
            }catch(Exception $erro){
