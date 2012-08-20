@@ -21,7 +21,7 @@ $time="";
                 if(!empty($_POST['idDialogo'])){                    
                                         
                      $oTalker = new Talker();
-                     //$oDialogo = $oTalker->obterDialogo($_POST['idDialogo']);
+                     $oDialogo = $oTalker->obterDialogo($_POST['idDialogo']);
                      
                      $oDialogo = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                      
