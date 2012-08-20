@@ -8,8 +8,8 @@ class ProxyDAO {
     */
    public function persistirDialogo(Dialogo $oDialogo) {
        try{
-           $dao = new DAO();
-           return $dao->persistirDialogo($oDialogo); 
+           $oDao = new DAO();
+           return $oDao->persistirDialogo($oDialogo); 
         }catch(Exception $erro){
             echo($erro->getMessage());
         }
@@ -22,8 +22,8 @@ class ProxyDAO {
     */
    public function persistirMensagem(Mensagem $mensagem) {
        try{
-          $dao = new DAO();
-          return $dao->persistirMensagem($mensagem);
+          $oDao = new DAO();
+          return $oDao->persistirMensagem($mensagem);
         }catch(Exception $erro){
             echo($erro->getMessage());
         }
@@ -36,20 +36,38 @@ class ProxyDAO {
     */
    public function colecaoMensagens($id) {
        try{
-           $dao = new DAO();
-           return $dao->colecaoMensagens($id);
+           $oDao = new DAO();
+           return $oDao->colecaoMensagens($id);
         }catch(Exception $erro){
             echo($erro->getMessage());
         }
    }
    
-    function obterDialogo($id){
+    public function obterDialogo($id){
          try{
-           $dao = new DAO();
-           return $dao->obterDialogo($id);
+           $oDao = new DAO();
+           return $oDao->obterDialogo($id);
         }catch(Exception $erro){
             echo($erro->getMessage());
         }
     }
-   
+    
+    public function validarUsuario(){
+        try{
+            
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+        
+    }
+    
+    public function obterDialogoDeTalkers($talker1,$talker2){
+         try{
+           $oDao = new DAO();
+           return $oDao->obterDialogoDeTalkers($talker1,$talker2);
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+    }
+    
 }
