@@ -136,7 +136,6 @@ class DAO {
            foreach ($result as $mensagem){
             $oDialogo->setCMensagens($mensagem);
             }
-           
            return $idDialogo;
             
            }catch(Exception $erro){
