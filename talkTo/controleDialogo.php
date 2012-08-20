@@ -26,29 +26,28 @@ $dialogo="";
 
                      if($oDialogo->getStatus()){
                          foreach($oDialogo->getCMensagens() as $oMensagem){
+                } 
+                    $oTalker = new Talker();
+                    $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+                    
+                    if($id!=null){
+                        
+                        $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+                        $oDialogo = $oTalker->obterDialogo($id); 
+                        
+                        foreach($oDialogo->getCMensagens() as $oMensagem){
+
                              $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
                         }
-                        
-                     } else {
+                    }else{
                         $oDialogo = new Dialogo(); // criando Dialogo
                         $oDialogo->setId(null);
                         $oDialogo->setHoraData(time());
                         $oDialogo->setTalker1($idTalker1);
                         $oDialogo->setTalker2($idTalker2);
                         $oDialogo->setStatus(true);
-                     }
-                     
-                     
-                }else{
-                    $oDialogo = new Dialogo(); // criando Dialogo
-                    $oDialogo->setId(null);
-                    $oDialogo->setHoraData(time());
-                    $oDialogo->setTalker1($idTalker1);
-                    $oDialogo->setTalker2($idTalker2);
-                    $oDialogo->setStatus(true);
-                    
-                }
-                
+                    }
+                                 
                 $oMensagem= new Mensagem(); //criando msg
                 $oMensagem->setId(null);
                 $oMensagem->setIdDialogo($oDialogo->getId());
@@ -70,7 +69,7 @@ $dialogo="";
                    $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";                   
                 }
                 
-            require_once("formdialogo.php");
+            require_once("formDialogo.php");
             }else{
                 throw new Exception("Digite uma mensagem para enviar!");
             }
