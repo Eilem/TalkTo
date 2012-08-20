@@ -10,13 +10,17 @@ class DAO {
    public function persistirDialogo(Dialogo &$oDialogo) {
        try{
                 $id = $oDialogo->getId();
+                $idTalker1 = $oDialogo->getTalker1();           
+                $idTalker2 = $oDialogo->getTalker2();
+                $status = $oDialogo->getStatus();
+                
                 if(is_null($id)){
                     $dataHora = $oDialogo->getHoraData();  
-                    $result = mysql_query("INSERT INTO dialogo (id, horaData) VALUES ('$id','$dataHora'); ");
+                    $result = mysql_query("INSERT INTO dialogo (id, horaData,talker1,talker2,status) VALUES ('$id','$dataHora','$idTalker1','$idTalker2','$status'); ");
                     $oDialogo->setId(mysql_insert_id());
                     
                 }
-                $e = $oDialogo->getCMensagens();
+                $e = $oDialogo->getCMensagens();  // e???
                 $oMensagem = $e[count($e)-1];
                 $oMensagem->setIdDialogo($oDialogo->getId());
                 $result = $this->persistirMensagem($oMensagem);
@@ -90,6 +94,10 @@ class DAO {
            $oDialogo = new Dialogo();
            $oDialogo->setId($result["id"]);
            $oDialogo->setHoraData($result["horaData"]);
+           $oDialogo->setTalker1($result["talker1"]);
+           $oDialogo->setTalker2($result["talker2"]);
+           $oDialogo->setStatus($result["status"]);
+           
            $result = $this->colecaoMensagens($id);
            foreach ($result as $mensagem){
                $oDialogo->setCMensagens($mensagem);
@@ -116,4 +124,15 @@ class DAO {
            echo($erro->getMessage());
        }
    }
+   
+   public function obterDialogosDeTalkers($talker1,$talker2){
+       try{
+           
+           
+           }catch(Exception $erro){
+               $erro->getMessage();
+           }
+       
+   }
+   
 }

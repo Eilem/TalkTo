@@ -21,6 +21,10 @@
                 <input type="hidden" name="idDialogo" value="<?php if(isset($id)) echo($id);?>"/>
             </div>
             <div>
+                User 1<input type="text" name="idTalker1" value="<?php if(isset($idtalker1)) echo($idtalker1);?>"/>
+                User 2<input type="text" name="idTalker2" value="<?php if(isset($idtalker2)) echo($idtalker2);?>"/>
+            </div>            
+            <div>
                 <textarea name="mensagens" readonly>
                   <?php               
                   if(isset($dialogo)){
