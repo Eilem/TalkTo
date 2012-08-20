@@ -10,7 +10,7 @@ class Talker {
         }
     }
     
-    public function obterDialogoDeTalkers($talker1,$talker2){
+    public function obterDialogosDeTalkers($talker1,$talker2){
         try{
         $oProxyDao = new ProxyDAO();
         return $oProxyDao->obterDialogoDeTalkers($talker1,$talker2);
