@@ -13,7 +13,7 @@ class Talker {
     public function obterDialogosDeTalkers($talker1,$talker2){
         try{
         $oProxyDao = new ProxyDAO();
-        return $oProxyDao->obterDialogoDeTalkers($talker1,$talker2);
+        return $oProxyDao->obterDialogosDeTalkers($talker1,$talker2);
         }catch(Exception $erro){
             echo($erro->getMessage());
         }

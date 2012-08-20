@@ -2,7 +2,6 @@
 require_once("bootstrap.php");
 
 $dialogo="";
-$time="";
 
     try{
         if(!empty($_POST)){            
@@ -19,12 +18,10 @@ $time="";
                     } 
 
                 if(!empty($_POST['idDialogo'])){                    
-                                        
+                                      
                      $oTalker = new Talker();
-                     //$oDialogo = $oTalker->obterDialogo($_POST['idDialogo']);
-                     
-                     $oDialogo = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
-                     
+                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+                     $oDialogo = $oTalker->obterDialogo($id);
                      if($oDialogo->getStatus()){
                          foreach($oDialogo->getCMensagens() as $oMensagem){
                              $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";

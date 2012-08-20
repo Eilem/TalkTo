@@ -133,8 +133,6 @@ class DAO {
            
            $idDialogo = $result['id'];
            
-           var_dump($idDialogo);
-           
            return $idDialogo;
                      
            
