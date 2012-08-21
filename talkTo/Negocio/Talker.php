@@ -28,10 +28,10 @@ class Talker {
         }
     }
 
-    public function encerrarDialogo(){
+    public function encerrarDialogo($talker1,$talker2){
         try{
             $oProxyDao = new ProxyDAO();
-            return $oProxyDao->encerrarDialogo();
+            return $oProxyDao->encerrarDialogo($talker1, $talker2);
 
         }catch(Exception $erro){
             echo($erro->getMessage());
