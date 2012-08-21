@@ -20,8 +20,6 @@ $dialogo="";
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                     
                     if($id!=null){
-                        
-                        $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                         $oDialogo = $oTalker->obterDialogo($id); 
                         
                         foreach($oDialogo->getCMensagens() as $oMensagem){

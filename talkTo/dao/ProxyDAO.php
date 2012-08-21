@@ -79,10 +79,10 @@ class ProxyDAO {
         }
     }
     
-    public function encerrarDialogo(){
+    public function encerrarDialogo($talker1, $talker2){
         try{
             $oDao = new DAO();
-            return $oDao->encerrarDialogo();
+            return $oDao->encerrarDialogo($talker1, $talker2);
             
         }catch(Exception $erro){
             echo($erro->getMessage());

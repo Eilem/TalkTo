@@ -67,7 +67,8 @@ class DAO {
        try{
          
         $result = mysql_query("SELECT * FROM mensagem where idDialogo='$id'");
-        if($result){      
+        if($result){     
+            $colecao = array();
               while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
                     $mensagem = new Mensagem();
                     $mensagem->setId($row["id"]);
@@ -131,15 +132,7 @@ class DAO {
            $result = mysql_fetch_array($result,MYSQLI_ASSOC);
            
            $idDialogo = $result['id'];
-           
-           $oDialogo = new Dialogo();
-           
-           $result = $this->colecaoMensagens($idDialogo);
-           foreach ($result as $mensagem){
-            $oDialogo->setCMensagens($mensagem);
-            }
-           
-           return $oDialogo;
+           return $idDialogo;
             
            }catch(Exception $erro){
                $erro->getMessage();
@@ -166,10 +159,19 @@ class DAO {
        }
    }
    
-   public function encerrarDialogo(){
+   public function encerrarDialogo($talker1, $talker2){
        try{
-           
-           
+           var_dump($talker1);
+           var_dump($talker2);
+           $result = mysql_query("UPDATE dialogo
+                                  SET status=0
+                                  WHERE talker1={$talker1} AND talker2{$talker2} AND status=1
+                                  ");
+                                  var_dump($result);
+            if($result){
+                return TRUE;
+            }else
+                return FALSE;
        }catch(Exception $erro){
            echo($erro->getMessage());
        }
