@@ -26,8 +26,14 @@ require_once("bootstrap.php");
     
     function encerrarDialogo($idTalker1,$idTalker2){
         $oTalker = new Talker();
+ // tratrar o usua
+        if($oTalker->validarUsuario($idTalker1)){
+
+        }
+        
+        $oTalker->validarUsuario($idTalker2);
+        
         $oTalker->encerrarDialogo($idTalker1,$idTalker2);
-        var_dump($oTalker);
     }
     function atualizar($idTalker1,$idTalker2){
         $dialogo="";

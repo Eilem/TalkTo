@@ -38,10 +38,10 @@ class Talker {
         }
     }
 
-   public function validarUsuario($talker1,$talker2){
+   public function validarUsuario($idTalker){
         try {
             $oProxyDao = new ProxyDAO();
-            return $oProxyDao->validarUsuario($talker1, $talker2);            
+            return $oProxyDao->validarUsuario($idTalker);            
         }catch(Exception $erro) {
             echo($erro->getMessage());
         }

@@ -6,7 +6,7 @@
     </head>
     <body>
         <form method="POST" action="controleDialogo.php" class="formDialogo">
-            <h3>VocÃª esta no Talker To!<h3/>
+            <h3>Você esta no Talker To!<h3/>
             <br/>
             <div>
                 <input type="hidden" name="idDialogo" value="<?php if(isset($id)) echo($id);?>"/>

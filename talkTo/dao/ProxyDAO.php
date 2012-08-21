@@ -80,10 +80,10 @@ class ProxyDAO {
         }
     }
     
-    public function validarUsuario($talker1,$talker2){
+    public function validarUsuario($idTalker){
         try{
-            $oDao = new ProxyDAO();
-            return $oDao->validarUsuario($talker1, $talker2);
+            $oDao = new Dao();
+            return $oDao->validarUsuario($idTalker);
         }catch(Exception $erro){
             echo($erro->getMessage());
         }

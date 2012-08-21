@@ -167,26 +167,18 @@ class DAO {
                                   ");
             if($result){
                 return TRUE;
-            }else
+            }else{
                 return FALSE;
+            }
        }catch(Exception $erro){
            echo($erro->getMessage());
        }
    }
    
-   public function validarUsuario($talker1, $talker2){
+   public function validarUsuario($idTalker){
         try {
-            $result1 = mysql_query("SELECT * FROM user WHERE talker1={$talker1}");
-            if($result1){
-                return true;
-            }else
-                return FALSE;
-            
-            $result2 = mysql_query("SELECT * FROM user WHERE talker2={$talker2}");
-            if($result2){
-                return true;
-            }else
-                return FALSE;
+            $result = mysql_query("SELECT * FROM user WHERE id={$idTalker}");
+            return (bool) mysql_fetch_array($result,MYSQL_ASSOC);
             
         }catch(Exception $erro) {
             echo($erro->getMessage());
