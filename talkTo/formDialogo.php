@@ -5,16 +5,20 @@
         <link rel="stylesheet" type="text/css" href="estilo.css">
         <script type="text/javascript"> 
             function validaMensagem(formulario)
-            {
-                if(formulario.mensagem.value==""){
-                alert("Digite uma mensagem para enviar!");
-                return false;
+            {    
+                 if(formulario.atualizar.value=="Atualizar"){
+                    return true;
+                    die();
+                
+                }else if(formulario.mensagem.value==""){
+                         alert("Digite uma mensagem para enviar!");
+                    return false;
                 }
             }
         </script>
     </head>
     <body>
-        <form method="POST" action="controleDialogo.php" title="Clique aqui para enviar a Mensagem" class="formDialogo" onSubmit="return validaMensagem(this)">
+        <form method="POST" action="controleDialogo.php" class="formDialogo" onSubmit="return validaMensagem(this)">
             <h3>Você esta no Talker To!<h3/>
             <br/>
             <div>
@@ -41,7 +45,16 @@
             <div>
                 <input type="submit" value="Enviar Mensagem" name="texto"/>
             </div>
+            
+            <form method="POST" action="controleDialogo.php" title="Teste">
+                 <div>
+                     <input type="submit" value="Atualizar" name="atualizar"/>
+                </div>
+            </form>
         </form>
+        
+        
+        
         <form method="POST" action="index.html" title="Clique aqui para Sair do Diálogo">
             <div class="sair">
                 <input type="submit" value="Fechar Diálogo" name="fecharDialogo"/>

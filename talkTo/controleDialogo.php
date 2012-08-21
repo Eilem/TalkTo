@@ -1,22 +1,48 @@
 <?php
 require_once("bootstrap.php");
-
-$dialogo="";
-
     try{
-        if(!empty($_POST)){            
-                
-            if(!empty($_POST['mensagem'])){
-                $mensagem = $_POST['mensagem'];
-                
-                if(!empty($_POST['idTalker1'])){
-                    $idTalker1 = $_POST['idTalker1'];
-                    }
+        if(!empty($_POST)){   
+            if(!empty($_POST['idTalker1'])){
+                $idTalker1 = $_POST['idTalker1'];
+            }
 
-                if(!empty($_POST['idTalker2'])){
-                    $idTalker2 = $_POST['idTalker2'];
-                } 
+            if(!empty($_POST['idTalker2'])){
+                $idTalker2= $_POST['idTalker2'];
+            } 
+            if(!empty($_POST['atualizar'])){
+                atualizar($idTalker1, $idTalker2);
+            }else{
+                enviar($idTalker1, $idTalker2);
+            }
+        }
+        
+             
+    }catch(Exception $erro){
+        echo($erro->getMessage());
+    }
+    
+    
+    function atualizar($idTalker1,$idTalker2){
+        $dialogo="";
                     $oTalker = new Talker();
+                    $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+                    
+                    if($id!=null){
+                        $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+                        $oDialogo = $oTalker->obterDialogo($id); 
+                        
+                        foreach($oDialogo->getCMensagens() as $oMensagem){
+                             $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
+                        }
+                    }
+            require_once("formDialogo.php");
+    }
+    
+    function enviar($idTalker1, $idTalker2){
+        $dialogo="";
+        if(!empty($_POST['mensagem'])){
+                $mensagem = $_POST['mensagem'];
+               $oTalker = new Talker();
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                     
                     if($id!=null){
@@ -55,13 +81,7 @@ $dialogo="";
                 $dialogo="";
                 foreach($cMensagens as $oMensagem){
                    $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";                   
-                }
-                
+                }    
             require_once("formDialogo.php");
-            }else{
-                throw new Exception("Digite uma mensagem para enviar!");
             }
-        }
-    }catch(Exception $erro){
-        echo($erro->getMessage());
     }
