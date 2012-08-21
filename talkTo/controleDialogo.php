@@ -9,19 +9,26 @@ require_once("bootstrap.php");
             if(!empty($_POST['idTalker2'])){
                 $idTalker2= $_POST['idTalker2'];
             } 
+            
             if(!empty($_POST['atualizar'])){
                 atualizar($idTalker1, $idTalker2);
             }else{
                 enviar($idTalker1, $idTalker2);
             }
-        }
-        
-             
+            
+             if(!empty($_POST['fecharDialogo'])){
+                encerrarDialogo($idTalker1, $idTalker2);
+             }
+        }     
     }catch(Exception $erro){
         echo($erro->getMessage());
     }
     
-    
+    function encerrarDialogo($idTalker1,$idTalker2){
+        $oTalker = new Talker();
+        $oTalker->encerrarDialogo($idTalker1,$idTalker2);
+        var_dump($oTalker);
+    }
     function atualizar($idTalker1,$idTalker2){
         $dialogo="";
                     $oTalker = new Talker();
@@ -42,7 +49,7 @@ require_once("bootstrap.php");
         $dialogo="";
         if(!empty($_POST['mensagem'])){
                 $mensagem = $_POST['mensagem'];
-               $oTalker = new Talker();
+                    $oTalker = new Talker();
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                     
                     if($id!=null){

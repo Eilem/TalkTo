@@ -3,23 +3,10 @@
         <title>Talk To</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="estilo.css">
-        <script type="text/javascript"> 
-            function validaMensagem(formulario)
-            {    
-                 if(formulario.atualizar.value=="Atualizar"){
-                    return true;
-                    die();
-                
-                }else if(formulario.mensagem.value==""){
-                         alert("Digite uma mensagem para enviar!");
-                    return false;
-                }
-            }
-        </script>
     </head>
     <body>
-        <form method="POST" action="controleDialogo.php" class="formDialogo" onSubmit="return validaMensagem(this)">
-            <h3>Você esta no Talker To!<h3/>
+        <form method="POST" action="controleDialogo.php" class="formDialogo">
+            <h3>VocÃª esta no Talker To!<h3/>
             <br/>
             <div>
                 <input type="hidden" name="idDialogo" value="<?php if(isset($id)) echo($id);?>"/>
@@ -46,18 +33,16 @@
                 <input type="submit" value="Enviar Mensagem" name="texto"/>
             </div>
             
-            <form method="POST" action="controleDialogo.php" title="Teste">
-                 <div>
-                     <input type="submit" value="Atualizar" name="atualizar"/>
-                </div>
-            </form>
+            <input type="submit" value="Atualizar" name="atualizar"/>
+            <input type="submit" value="Fechar Dialogo" name="fecharDialogo"/>
+
         </form>
+       
         
         
-        
-        <form method="POST" action="index.html" title="Clique aqui para Sair do Diálogo">
+        <form method="POST" action="index.html" title="Clique aqui para Sair do DiÃ¡logo">
             <div class="sair">
-                <input type="submit" value="Fechar Diálogo" name="fecharDialogo"/>
+                <input type="submit" value="Sair" name="sair"/>
             </div>
         </form>
     </body>

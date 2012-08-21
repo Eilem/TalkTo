@@ -59,7 +59,7 @@ class DAO {
    }
 
      /**
-    * Coleções Mensagens de um determinado Dialogo que foi passado pelo parametro $id
+    * ColeÃ§Ãµes Mensagens de um determinado Dialogo que foi passado pelo parametro $id
     * @param int $id
     * @return array de Mensagens
     */
