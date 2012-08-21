@@ -161,13 +161,10 @@ class DAO {
    
    public function encerrarDialogo($talker1, $talker2){
        try{
-           var_dump($talker1);
-           var_dump($talker2);
            $result = mysql_query("UPDATE dialogo
                                   SET status=0
-                                  WHERE talker1={$talker1} AND talker2{$talker2} AND status=1
+                                  WHERE talker1={$talker1} AND talker2={$talker2} AND status=1
                                   ");
-                                  var_dump($result);
             if($result){
                 return TRUE;
             }else
@@ -176,4 +173,24 @@ class DAO {
            echo($erro->getMessage());
        }
    }
+   
+   public function validarUsuario($talker1, $talker2){
+        try {
+            $result1 = mysql_query("SELECT * FROM user WHERE talker1={$talker1}");
+            if($result1){
+                return true;
+            }else
+                return FALSE;
+            
+            $result2 = mysql_query("SELECT * FROM user WHERE talker2={$talker2}");
+            if($result2){
+                return true;
+            }else
+                return FALSE;
+            
+        }catch(Exception $erro) {
+            echo($erro->getMessage());
+        }
+      }
+   
 }

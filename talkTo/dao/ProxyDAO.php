@@ -52,15 +52,6 @@ class ProxyDAO {
         }
     }
     
-    public function validarUsuario(){
-        try{
-            
-        }catch(Exception $erro){
-            echo($erro->getMessage());
-        }
-        
-    }
-    
     public function obterDialogosDeTalkers($talker1,$talker2){
          try{
            $oDao = new DAO();
@@ -87,5 +78,15 @@ class ProxyDAO {
         }catch(Exception $erro){
             echo($erro->getMessage());
         }
+    }
+    
+    public function validarUsuario($talker1,$talker2){
+        try{
+            $oDao = new ProxyDAO();
+            return $oDao->validarUsuario($talker1, $talker2);
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+        
     }
 }
