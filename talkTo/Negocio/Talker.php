@@ -19,4 +19,22 @@ class Talker {
         }
     }
     
+    public function atualizarDialogo($talker1, $talker2){
+        try{
+            $oProxyDao = new ProxyDAO();
+            return $oProxyDao->atualizarDialogo($talker1, $talker2);
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+    }
+
+    public function encerrarDialogo(){
+        try{
+            $oProxyDao = new ProxyDAO();
+            return $oProxyDao->encerrarDialogo();
+
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+    }
 }

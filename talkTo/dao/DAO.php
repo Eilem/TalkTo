@@ -109,8 +109,7 @@ class DAO {
            
        }
    }
-   
-   
+
    function logar(Usuario &$oUsuario){
        try{
            
@@ -131,20 +130,48 @@ class DAO {
            $result = mysql_query("SELECT * FROM dialogo where talker1={$talker1} and talker2={$talker2} and status=1");
            $result = mysql_fetch_array($result,MYSQLI_ASSOC);
            
-
-           $result = $this->colecaoMensagens($id);
+           $idDialogo = $result['id'];
            
+           $oDialogo = new Dialogo();
+           
+           $result = $this->colecaoMensagens($idDialogo);
            foreach ($result as $mensagem){
             $oDialogo->setCMensagens($mensagem);
             }
-            
-           $idDialogo = $result['id'];
            
-           return $idDialogo;
+           return $oDialogo;
             
            }catch(Exception $erro){
                $erro->getMessage();
            }
    }
    
+   public function atualizarDialogo($talker1,$talker2){
+       try{
+           $result = mysql_query("SELECT * FROM dialogo WHERE talker1={$talker1} AND talker2={$talker2} AND status=1");
+           $result = mysql_fetch_array($result,MYSQL_ASSOC);
+           
+           $idDialogo = $result['id'];
+           
+           $oDialogo = new Dialogo();
+           
+           $result = $this->colecaoMensagens($idDialogo);
+           foreach($result as $mensagem){
+               $oDialogo->setCMensagens($mensagem);
+           }
+           return $oDialogo;
+           
+       }catch(Exception $erro){
+           $erro->getMessage();
+       }
+   }
+   
+   public function encerrarDialogo(){
+       try{
+           
+           
+       }catch(Exception $erro){
+           echo($erro->getMessage());
+       }
+   }
 }

@@ -1,5 +1,3 @@
-require_once("bootstrap.php");
-
 <html>
     <head>
         <title>Talk To</title>
@@ -46,7 +44,7 @@ require_once("bootstrap.php");
         </form>
         <form method="POST" action="index.html" title="Clique aqui para Sair do Diálogo">
             <div class="sair">
-                <input type="submit" value="Fechar Diálogo" name="fecharDialogo" <?php $oDialogo->setStatus(false); ?>/>
+                <input type="submit" value="Fechar Diálogo" name="fecharDialogo"/>
             </div>
         </form>
     </body>

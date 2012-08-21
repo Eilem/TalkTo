@@ -70,4 +70,22 @@ class ProxyDAO {
         }
     }
     
+    public function atualizarDialogo($talker1, $talker2){
+        try{
+            $oDao = new DAO();
+            return  $oDao->atualizarDialogo($talker1, $talker2);
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+    }
+    
+    public function encerrarDialogo(){
+        try{
+            $oDao = new DAO();
+            return $oDao->encerrarDialogo();
+            
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
+    }
 }
