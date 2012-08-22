@@ -27,16 +27,10 @@ require_once("bootstrap.php");
     function encerrarDialogo($idTalker1,$idTalker2){
         $oTalker = new Talker();
         try{
-            if(!$oTalker->validarUsuario($idTalker1)){
-                throw new Exception("Talker 1 não localizado!! Favor inseir um id válido!");
-            }
-            if(!$oTalker->validarUsuario($idTalker2)){
-                throw new Exception("Talker 2 não localizado!! Favor inseir um id válido!");
-            }
-            
+          if(validacaoUsuario($idTalker1,$idTalker2)){
             $oTalker->encerrarDialogo($idTalker1,$idTalker2);
             require_once("index.html");
-            
+          }  
         }catch(Exception $erro){
             echo($erro->getMessage());
             
@@ -48,20 +42,16 @@ require_once("bootstrap.php");
         $oTalker = new Talker();
         $dialogo="";
         try{
-            if(!$oTalker->validarUsuario($idTalker1)){
-                throw new Exception("Talker 1 não localizado!! Favor inseir um id válido!");
-            }
-            if(!$oTalker->validarUsuario($idTalker2)){
-                throw new Exception("Talker 2 não localizado!! Favor inseir um id válido!");
-            }
-                        
-            $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
-            if($id!=null){
-                $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a função? o $id já possui o id do dialogo^
-                $oDialogo = $oTalker->obterDialogo($id); // não é preciso instanciar o objeto $oDialogo??
+                       
+            if(validacaoUsuario($idTalker1,$idTalker2)){
+                $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+                if($id!=null){
+                    $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a função? o $id já possui o id do dialogo^
+                    $oDialogo = $oTalker->obterDialogo($id); // não é preciso instanciar o objeto $oDialogo??
 
-                foreach($oDialogo->getCMensagens() as $oMensagem){
-                        $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
+                    foreach($oDialogo->getCMensagens() as $oMensagem){
+                            $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
+                    }
                 }
             }
             require_once("formDialogo.php");
@@ -73,16 +63,12 @@ require_once("bootstrap.php");
     
     function enviar($idTalker1, $idTalker2){
         $dialogo="";
-        if(!empty($_POST['mensagem'])){
-                $mensagem = $_POST['mensagem'];
+        try{
+            if(validacaoUsuario($idTalker1,$idTalker2)){
+                if(!empty($_POST['mensagem'])){
+                    $mensagem = $_POST['mensagem'];
                     $oTalker = new Talker();
-                    try{
-                        if(!$oTalker->validarUsuario($idTalker1)){
-                            throw new Exception("Talker 1 não localizado!! Favor inseir um id válido!");
-                            }
-                        if(!$oTalker->validarUsuario($idTalker2)){
-                            throw new Exception("Talker 2 não localizado!! Favor inseir um id válido!");
-                            }
+                    
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                     if($id!=null){
                         $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
@@ -121,8 +107,26 @@ require_once("bootstrap.php");
                             $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
                             }
                         require_once("formDialogo.php");    
-                        }catch(Exception $erro){
+                       
+                }
+             }
+             }catch(Exception $erro){
                         echo($erro->getMessage());
-                    }
-            }      
+        }
     }
+            
+            function validacaoUsuario($idTalker1,$idTalker2){
+                 $oTalker = new Talker();
+                 $validacao1 = $oTalker->validarUsuario($idTalker1);
+                 $validacao2 = $oTalker->validarUsuario($idTalker2);
+                 
+                 if(($validacao1)&&($validacao2)){
+                     return true;
+                 }
+                 else{
+                     throw new Exception ("Talker não localizado!! Favor inseir um id válido!");
+                     return false;
+                 }
+                    
+            }
+    
