@@ -18,6 +18,7 @@ require_once("bootstrap.php");
             
              if(!empty($_POST['fecharDialogo'])){
                 encerrarDialogo($idTalker1, $idTalker2);
+                require_once("formDialogo.php");
              }
         }     
     }catch(Exception $erro){
@@ -27,7 +28,9 @@ require_once("bootstrap.php");
     function encerrarDialogo($idTalker1,$idTalker2){
         $oTalker = new Talker();
         $oTalker->encerrarDialogo($idTalker1,$idTalker2);
-        var_dump($oTalker);
+        
+        
+        
     }
     function atualizar($idTalker1,$idTalker2){
         $dialogo="";
@@ -90,5 +93,8 @@ require_once("bootstrap.php");
                    $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";                   
                 }    
             require_once("formDialogo.php");
+            }
+            else{
+                require_once("formDialogo.php");
             }
     }
