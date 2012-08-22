@@ -18,7 +18,6 @@ require_once("bootstrap.php");
             
              if(!empty($_POST['fecharDialogo'])){
                 encerrarDialogo($idTalker1, $idTalker2);
-                require_once("formDialogo.php");
              }
         }     
     }catch(Exception $erro){
@@ -27,25 +26,49 @@ require_once("bootstrap.php");
     
     function encerrarDialogo($idTalker1,$idTalker2){
         $oTalker = new Talker();
-        $oTalker->encerrarDialogo($idTalker1,$idTalker2);
-        
-        
-        
+        try{
+            if(!$oTalker->validarUsuario($idTalker1)){
+                throw new Exception("Talker 1 não localizado!! Favor inseir um id válido!");
+            }
+            if(!$oTalker->validarUsuario($idTalker2)){
+                throw new Exception("Talker 2 não localizado!! Favor inseir um id válido!");
+            }
+            
+            $oTalker->encerrarDialogo($idTalker1,$idTalker2);
+            require_once("index.html");
+            
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+            
+        }
     }
+    
     function atualizar($idTalker1,$idTalker2){
+        
+        $oTalker = new Talker();
         $dialogo="";
-                    $oTalker = new Talker();
-                    $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
-                    
-                    if($id!=null){
-                        $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
-                        $oDialogo = $oTalker->obterDialogo($id); 
+        try{
+            if(!$oTalker->validarUsuario($idTalker1)){
+                throw new Exception("Talker 1 não localizado!! Favor inseir um id válido!");
+            }
+            if(!$oTalker->validarUsuario($idTalker2)){
+                throw new Exception("Talker 2 não localizado!! Favor inseir um id válido!");
+            }
                         
-                        foreach($oDialogo->getCMensagens() as $oMensagem){
-                             $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
-                        }
-                    }
+            $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
+            if($id!=null){
+                $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a função? o $id já possui o id do dialogo^
+                $oDialogo = $oTalker->obterDialogo($id); // não é preciso instanciar o objeto $oDialogo??
+
+                foreach($oDialogo->getCMensagens() as $oMensagem){
+                        $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
+                }
+            }
             require_once("formDialogo.php");
+    
+        }catch(Exception $erro){
+            echo($erro->getMessage());
+        }
     }
     
     function enviar($idTalker1, $idTalker2){
@@ -53,16 +76,21 @@ require_once("bootstrap.php");
         if(!empty($_POST['mensagem'])){
                 $mensagem = $_POST['mensagem'];
                     $oTalker = new Talker();
+                    try{
+                        if(!$oTalker->validarUsuario($idTalker1)){
+                            throw new Exception("Talker 1 não localizado!! Favor inseir um id válido!");
+                            }
+                        if(!$oTalker->validarUsuario($idTalker2)){
+                            throw new Exception("Talker 2 não localizado!! Favor inseir um id válido!");
+                            }
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
-                    
                     if($id!=null){
-                        
                         $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
-                        $oDialogo = $oTalker->obterDialogo($id); 
+                        $oDialogo = $oTalker->obterDialogo($id);
                         
                         foreach($oDialogo->getCMensagens() as $oMensagem){
-                             $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
-                        }
+                            $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
+                            }
                     }else{
                         $oDialogo = new Dialogo(); // criando Dialogo
                         $oDialogo->setId(null);
@@ -70,31 +98,31 @@ require_once("bootstrap.php");
                         $oDialogo->setTalker1($idTalker1);
                         $oDialogo->setTalker2($idTalker2);
                         $oDialogo->setStatus(true);
+                        }
+                        $oMensagem= new Mensagem(); //criando msg
+                        $oMensagem->setId(null);
+                        $oMensagem->setIdDialogo($oDialogo->getId());
+                        $oMensagem->setTexto($mensagem);
+                        $oMensagem->setDataHora(time());
+                        
+                        $oDialogo->setCMensagens($oMensagem);
+                        
+                        $oDialogo->persistir();
+                        
+                        $id = $oDialogo->getId();
+                        
+                        $oMensagem->__destruct();
+                        
+                        $cMensagens = $oDialogo->getCMensagens();
+                        
+                        $dialogo="";
+                        
+                        foreach($cMensagens as $oMensagem){
+                            $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
+                            }
+                        require_once("formDialogo.php");    
+                        }catch(Exception $erro){
+                        echo($erro->getMessage());
                     }
-                                 
-                $oMensagem= new Mensagem(); //criando msg
-                $oMensagem->setId(null);
-                $oMensagem->setIdDialogo($oDialogo->getId());
-                $oMensagem->setTexto($mensagem);
-                $oMensagem->setDataHora(time());
-                
-                $oDialogo->setCMensagens($oMensagem);
-                
-                $oDialogo->persistir();
-                
-                $id = $oDialogo->getId();
-
-                $oMensagem->__destruct();
-
-                $cMensagens = $oDialogo->getCMensagens();
-                
-                $dialogo="";
-                foreach($cMensagens as $oMensagem){
-                   $dialogo .= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";                   
-                }    
-            require_once("formDialogo.php");
-            }
-            else{
-                require_once("formDialogo.php");
-            }
+            }      
     }

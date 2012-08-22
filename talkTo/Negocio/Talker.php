@@ -37,4 +37,14 @@ class Talker {
             echo($erro->getMessage());
         }
     }
+
+   public function validarUsuario($idTalker){
+        try {
+            $oProxyDao = new ProxyDAO();
+            return $oProxyDao->validarUsuario($idTalker);            
+        }catch(Exception $erro) {
+            echo($erro->getMessage());
+        }
+   }
+      
 }

@@ -5,8 +5,8 @@
         <link rel="stylesheet" type="text/css" href="estilo.css">
     </head>
     <body>
-        <form method="POST" action="controleDialogo.php" class="formDialogo">
-            <h3>VocÃª esta no Talker To!<h3/>
+        <form method="POST" action="controleDialogo.php" class="formDialogo"/>
+            <h3>Você esta no Talker To!<h3/>
             <br/>
             <div>
                 <input type="hidden" name="idDialogo" value="<?php if(isset($id)) echo($id);?>"/>
@@ -30,19 +30,19 @@
             </div>
             <br/>
             <div>
-                <input type="submit" value="Enviar Mensagem" name="texto"/>
+                <input type="submit" value="Enviar Mensagem" name="texto" title="Clique aqui para enviar sua mensagem!"/>
             </div>
             
-            <input type="submit" value="Atualizar" name="atualizar"/>
-            <input type="submit" value="Fechar Dialogo" name="fecharDialogo"/>
+            <input type="submit" value="Atualizar" name="atualizar" title="Clique aqui para atualizar a conversa!"/>
+            <input type="submit" value="Fechar Dialogo" name="fecharDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
 
         </form>
        
         
         
-        <form method="POST" action="index.html" title="Clique aqui para Sair do DiÃ¡logo">
+        <form method="POST" action="index.html">
             <div class="sair">
-                <input type="submit" value="Sair" name="sair"/>
+                <input type="submit" value="Sair" name="sair" title="Clique aqui para Sair do Di&aacute;logo"/>
             </div>
         </form>
     </body>
