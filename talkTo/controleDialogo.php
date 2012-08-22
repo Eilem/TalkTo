@@ -12,14 +12,15 @@ require_once("bootstrap.php");
             
             if(!empty($_POST['atualizar'])){
                 atualizar($idTalker1, $idTalker2);
-            }else{
+            }
+            if(!empty($_POST['enviar'])){
                 enviar($idTalker1, $idTalker2);
             }
             
              if(!empty($_POST['fecharDialogo'])){
                 encerrarDialogo($idTalker1, $idTalker2);
-             }
-        }     
+             } 
+        }
     }catch(Exception $erro){
         echo($erro->getMessage());
     }

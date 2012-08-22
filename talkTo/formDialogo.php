@@ -30,7 +30,7 @@
             </div>
             <br/>
             <div>
-                <input type="submit" value="Enviar Mensagem" name="texto" title="Clique aqui para enviar sua mensagem!"/>
+                <input type="submit" value="Enviar Mensagem" name="enviar" title="Clique aqui para enviar sua mensagem!"/>
             </div>
             
             <input type="submit" value="Atualizar" name="atualizar" title="Clique aqui para atualizar a conversa!"/>
