@@ -116,7 +116,7 @@ require_once("bootstrap.php");
         }
     }
             
-            function validacaoUsuario($idTalker1,$idTalker2){
+    function validacaoUsuario($idTalker1,$idTalker2){
                  $oTalker = new Talker();
                  $validacao1 = $oTalker->validarUsuario($idTalker1);
                  $validacao2 = $oTalker->validarUsuario($idTalker2);
