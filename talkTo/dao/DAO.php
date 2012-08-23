@@ -42,8 +42,9 @@ class DAO {
        $idDialogo = $mensagem->getIdDialogo();
        $texto = $mensagem->getTexto();
        $dataHora = $mensagem->getDataHora();
+       $idUsuario = $mensagem->getIdUsuario();
 
-           $result = mysql_query("INSERT INTO mensagem (id, idDialogo, texto, dataHora) VALUES ('$id', '$idDialogo','$texto', '$dataHora')"); 
+           $result = mysql_query("INSERT INTO mensagem (id, idDialogo, texto, dataHora,user_id) VALUES ('$id', '$idDialogo','$texto', '$dataHora', '$idUsuario')"); 
            
            if($result){
                 $mensagem->setId(mysql_insert_id());
@@ -78,7 +79,7 @@ class DAO {
                     $colecao[] = $mensagem;
                 }
                 return $colecao;
-           }
+        }
         else{
             return FALSE;
                
@@ -183,6 +184,44 @@ class DAO {
         }catch(Exception $erro) {
             echo($erro->getMessage());
         }
-      }
+   }
    
+   public function cUsuarios(){
+        try {
+            $result = mysql_query("SELECT * from user");
+            if($result){
+                $colecao = array(); 
+                while($row = mysql_fetch_array($result,MYSQL_ASSOC) ){
+                    $oUsuario = new Usuario();
+                    $oUsuario->setId($row["id"]);
+                    $oUsuario->setUsername($row["user"]);
+                    $oUsuario->setOnLine($row["onLine"]);
+                    $colecao[]=$oUsuario;
+                }
+                return $colecao;
+            }
+            else{
+                return false;
+            }
+             
+        }catch(Exception $erro) {
+            echo($erro->getMessage());
+        }
+   }
+   
+   public function isOnLine(Usuario $oUsuario){
+        try {
+           $id = $oUsuario->getId();
+           $online = $oUsuario->getOnLine();
+           $result = mysql_query("UPDATE user SET online={$online} WHERE id={$id}");
+           if($result){
+                return true;
+            }else{
+                return false;
+            }
+        }catch(Exception $erro) {
+            echo($erro->getMessage());
+        }
+   }
+  
 }

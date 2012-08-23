@@ -34,3 +34,11 @@ textarea{
 body{
     background-color: aliceblue;
 }
+
+select{
+    width:150px;
+    height: 150px;
+    padding:0pt 10pt;
+}
+
+

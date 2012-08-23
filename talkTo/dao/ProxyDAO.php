@@ -86,7 +86,25 @@ class ProxyDAO {
             return $oDao->validarUsuario($idTalker);
         }catch(Exception $erro){
             echo($erro->getMessage());
-        }
-        
+        }  
     }
+    
+   public function isOnLine(Usuario $oUsuario){
+        try {
+            $oDao = new Dao();
+            return $oDao->isOnLine($oUsuario);
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
+   }
+   
+   public function cUsuarios(){
+        try {
+            $oDao = new Dao();
+            return $oDao->cUsuarios();
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
+   }
+  
 }

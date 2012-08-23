@@ -5,7 +5,7 @@ class Usuario{
     private $id;
     private $user;
     private $password;
-    private $logado;    
+    private $onLine;    
     
     /**
      * Obtem o Id de Usuário
@@ -56,24 +56,21 @@ class Usuario{
     }
 
     /**
-     * 
      * @return bool
      */
-    public function getLogado() {
-        return $this->logado;
+    public function getOnLine() {
+        return $this->onLine;
     }
 
     /**
-     *
-     * @param bool $logado 
+     * @param bool $onLine
      */
-    public function setLogado($logado) {
-        $this->logado = $logado;
+    public function setOnLine($onLine) {
+        $this->onLine = $onLine;
     }
 
     public function validarUsuario(Usuario $oUsuario){
         try{
-        
             $oProxyDAO = new ProxyDAO();
             $oProxyDAO->validarUsuario();
             
@@ -81,5 +78,14 @@ class Usuario{
             echo($erro->getMessage());
         }
     }
-
+    
+    public function isOnLine(){
+        try{
+            $oProxyDAO = new ProxyDAO();
+            return $oProxyDAO->isOnLine($this);
+         }catch (Exception $erro){
+             echo($erro->getMessage());
+         }
+    }
+    
 }

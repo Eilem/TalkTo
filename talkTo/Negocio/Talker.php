@@ -46,5 +46,14 @@ class Talker {
             echo($erro->getMessage());
         }
    }
-      
+   
+   public function cUsuarios(){
+          try {
+            $oProxyDao = new ProxyDAO();
+            return $oProxyDao->cUsuarios();
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
+   }
+
 }

@@ -5,8 +5,9 @@ class Mensagem {
     private $idDialogo;
     private $texto;
     private $dataHora;
-    
-    /**
+    private $idUsuario;
+   
+     /**
      * Construtor da classe Mensagem 
      */
     public function Mensagem($texto=NULL){
@@ -77,6 +78,14 @@ class Mensagem {
      */
     public function setDataHora($dataHora) {
         $this->dataHora = $dataHora;
+    }
+    
+     public function getIdUsuario() {
+        return $this->idUsuario;
+    }
+
+    public function setIdUsuario($idUsuario) {
+        $this->idUsuario = $idUsuario;
     }
     
    public function __destruct() {

@@ -1,25 +1,41 @@
 <?php
 require_once("bootstrap.php");
-    try{
-        if(!empty($_POST)){   
-            if(!empty($_POST['idTalker1'])){
-                $idTalker1 = $_POST['idTalker1'];
-            }
+ $cUsuarios = "";
 
-            if(!empty($_POST['idTalker2'])){
-                $idTalker2= $_POST['idTalker2'];
-            } 
-            
-            if(!empty($_POST['atualizar'])){
-                atualizar($idTalker1, $idTalker2);
+    try{
+        if(!empty($_POST)){
+            if(!empty($_POST['usuario'])){
+                $idTalker1 = $_POST['usuario'];
             }
-            if(!empty($_POST['enviar'])){
-                enviar($idTalker1, $idTalker2);
+            $oTalker = new Talker();
+            if($oTalker->validarUsuario($idTalker1)){
+                $cUsuarios = $oTalker->cUsuarios();
+                 require_once("talker.php");
+                 
+                    
+                    if(!empty($_POST['idTalker2'])){
+                        $idTalker2= $_POST['idTalker2'];
+                    } 
+
+                    if(!empty($_POST['atualizar'])){
+                        atualizar($idTalker1, $idTalker2);
+                    }
+                    if(!empty($_POST['enviar'])){
+                        enviar($idTalker1, $idTalker2);
+                    }
+
+                    if(!empty($_POST['fecharDialogo'])){
+                        encerrarDialogo($idTalker1, $idTalker2);
+                    } 
+                    
+
+                    
+            }
+            else{
+                echo "Talker não localizado!! Favor inseir um id válido!";
             }
             
-             if(!empty($_POST['fecharDialogo'])){
-                encerrarDialogo($idTalker1, $idTalker2);
-             } 
+            
         }
     }catch(Exception $erro){
         echo($erro->getMessage());
@@ -129,5 +145,5 @@ require_once("bootstrap.php");
                      return false;
                  }
                     
-            }
+    }
     
