@@ -6,10 +6,10 @@
 
     </head>
     <body class="index">
-        <form method="POST" action="controleDialogo.php" class="index"/>
+        <form method="POST" action="controllerLogin.php" class="index"/>
         <img src="welcome_talker.jpg"/>
         <h2>Bem vindo ao Talk To!!</h2>
-        Usuario <input type="text" name="usuario" value=""/> <p/>
+        Usuario <input type="text" name="user" value=""/> <p/>
         
         <input type="submit" value="Entrar" name="entrar"/> 
         
