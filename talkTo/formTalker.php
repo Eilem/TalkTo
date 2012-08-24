@@ -18,7 +18,8 @@
                 ?>
         </select>
             <p/>
-         <input type="submit" value="Dialogar" name="dialogar"/> 
+         <input type="submit" value="Dialogar" name="dialogar" title="Clique aqui para Iniciar um Di&aacute;logo!!"/> 
+         <input type="submit" value="Encerrar Diálogo" name="encerrar" title="Clique aqui para Encerrar este Di&aacute;logo!!"/> 
         
         </fomr>
     </body>
