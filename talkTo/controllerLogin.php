@@ -1,7 +1,7 @@
 <?php
 
 require_once 'bootstrap.php';
-
+$cUsuarios = "";
     try{
         if(!empty($_POST)){
             if(!empty($_POST['user'])){
@@ -15,6 +15,7 @@ require_once 'bootstrap.php';
                     $oUsuario->setOnLine('1');
                     
                     $oUsuario->isOnLine($oUsuario);
+                    $oUsuario->obterUsuario($oUsuario->getId());
                     
                     require_once("formTalker.php");
                     
