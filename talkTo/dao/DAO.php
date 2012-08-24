@@ -76,6 +76,7 @@ class DAO {
                     $mensagem->setIdDialogo($id);
                     $mensagem->setTexto($row["texto"]);
                     $mensagem->setDataHora($row["dataHora"]);
+                    $mensagem->setIdUsuario($row["user_id"]);
                     $colecao[] = $mensagem;
                 }
                 return $colecao;
@@ -125,8 +126,7 @@ class DAO {
            echo($erro->getMessage());
        }
    }
-   
-   
+     
    public function obterDialogosDeTalkers($talker1,$talker2){
        try{
            $result = mysql_query("SELECT * FROM dialogo where talker1={$talker1} and talker2={$talker2} and status=1");
@@ -204,6 +204,21 @@ class DAO {
                 return false;
             }
              
+        }catch(Exception $erro) {
+            echo($erro->getMessage());
+        }
+   }
+   
+   public function obterUsuario($idUsuario) {
+       try {
+            $result = mysql_query("SELECT * from user WHERE id={$idUsuario}");
+            $result = mysql_fetch_array($result,MYSQL_ASSOC);
+               $oUsuario = new Usuario();
+               $oUsuario->setId($result["id"]);
+               $oUsuario->setUsername($result["user"]);
+               $oUsuario->setOnLine($result["onLine"]);
+               
+           return $oUsuario;
         }catch(Exception $erro) {
             echo($erro->getMessage());
         }

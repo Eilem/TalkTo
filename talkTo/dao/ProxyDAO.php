@@ -107,4 +107,13 @@ class ProxyDAO {
         }
    }
   
+   public function obterUsuario($idUsuario){
+       try {
+            $oDao = new Dao();
+            return $oDao->obterUsuario($idUsuario);
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
+   
+   }
 }

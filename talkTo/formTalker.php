@@ -11,7 +11,6 @@
         <select name="usuario2" size="15"  multiple="multiple">
                 <option value="">Usuarios</option>
                 <?php
-                    
                     foreach($cUsuarios as $oUsuarios){
                         echo '<option value="'.$oUsuarios->getId().'">'.$oUsuarios->getUsername().": ".$oUsuarios->getOnLine().'</option>';                  
                     } 

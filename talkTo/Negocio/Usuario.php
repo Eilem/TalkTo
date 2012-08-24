@@ -69,7 +69,11 @@ class Usuario{
         $this->onLine = $onLine;
     }
 
+<<<<<<< HEAD
     public function validarUsuario($userId){
+=======
+    public function validarUsuario(){
+>>>>>>> 96a7c3cbd7c6f161d375ea26d908c70f2852cdd0
         try{
             $oProxyDAO = new ProxyDAO();
             $oProxyDAO->validarUsuario($userId);
@@ -88,4 +92,13 @@ class Usuario{
          }
     }
     
+     public function obterUsuario(){
+       try {
+            $oDao = new Dao();
+            return $oDao->obterUsuario($this->id);
+        } catch (Exception $erro) {
+            echo $erro->getMessage();
+        }
+   
+   }
 }
