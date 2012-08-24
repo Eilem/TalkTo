@@ -34,7 +34,7 @@
             </div>
             
             <input type="submit" value="Atualizar" name="atualizar" title="Clique aqui para atualizar a conversa!"/>
-            <input type="submit" value="Fechar Dialogo" name="fecharDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
+            <input type="submit" value="Encerrar Diálogo" name="encerrarDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
 
         </form>
        
