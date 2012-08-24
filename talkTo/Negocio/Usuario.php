@@ -3,7 +3,7 @@
 class Usuario{
     
     private $id;
-    private $user;
+    private $username;
     private $password;
     private $onLine;    
     
@@ -28,7 +28,7 @@ class Usuario{
      * @return string 
      */
     public function getUsername() {
-        return $this->user;
+        return $this->username;
     }
 
     /**
@@ -36,7 +36,7 @@ class Usuario{
      * @param type $username 
      */
     public function setUsername($username) {
-        $this->user = $username;
+        $this->username = $username;
     }
 
     /**
@@ -69,10 +69,10 @@ class Usuario{
         $this->onLine = $onLine;
     }
 
-    public function validarUsuario(Usuario $oUsuario){
+    public function validarUsuario($userId){
         try{
             $oProxyDAO = new ProxyDAO();
-            $oProxyDAO->validarUsuario();
+            $oProxyDAO->validarUsuario($userId);
             
         }catch(Exception $erro){
             echo($erro->getMessage());
