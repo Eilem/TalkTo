@@ -69,11 +69,7 @@ class Usuario{
         $this->onLine = $onLine;
     }
 
-<<<<<<< HEAD
     public function validarUsuario($userId){
-=======
-    public function validarUsuario(){
->>>>>>> 96a7c3cbd7c6f161d375ea26d908c70f2852cdd0
         try{
             $oProxyDAO = new ProxyDAO();
             $oProxyDAO->validarUsuario($userId);
