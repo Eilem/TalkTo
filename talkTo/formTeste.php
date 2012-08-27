@@ -23,6 +23,8 @@
                 ?>  
         </select>
             <p/>
+         <input type="hidden" value="<?php echo $idTalker1->getId(); ?>" name="usuario1"/>
+         <input type="hidden" value="flag" name="acao"/>
          <input type="submit" value="Dialogar" name="dialogar" title="Clique aqui para Iniciar um Di&aacute;logo!!"/> 
          <input type="submit" value="Encerrar Diálogo" name="encerrar" title="Clique aqui para Encerrar este Di&aacute;logo!!"/> 
         
