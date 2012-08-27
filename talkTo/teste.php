@@ -3,34 +3,38 @@
 require_once("bootstrap.php");
 
 
-listarUsuariosStatus();
+listarUsuariosStatus($user);
 
-function listarUsuariosStatus(){
+
+
+function listarUsuariosStatus($user){
+        $user = 1;
         $idTalker1="";
         $idTalker2="";
         $cUsuarios = "";
         $oUsuario = new Usuario();
-        $oUsuario->setId(4);
+        $oUsuario->setId($user);
         $oUsuario->setOnLine(1);
         $oUsuario->isOnLine();
-
+        
         // para aparecer o nome do usuario no form
-        $idTalker1 = obterTodosUsuario($oUsuario->getId(4));
-//        $idTalker1 = $oUsuario->obterUsuario();
+        $idTalker1 = obterTodosUsuario($oUsuario->getId());
         $oTalker = new Talker();
         $cUsuarios = $oTalker->cUsuarios();
     
-    if(empty($_POST['usuario2'])){
-        require_once("formTeste.php"); 
-    }else{
-        $idTalker2 = $_POST['usuario2'];
-        $idTalker2 = obterTodosUsuario($idTalker2);
-        
+        if(empty($_POST['usuario2'])){
+            require_once("formTeste.php"); 
+        }else{
+            $idTalker2 = $_POST['usuario2'];
+            $idTalker2 = obterTodosUsuario($idTalker2);
 
-        $idTalker1 = $idTalker1->getUsername();
-        $idTalker2 = $idTalker2->getUsername();
-        require_once("formDialogo.php");
-    } 
+
+            $idTalker1 = $idTalker1->getUsername();
+            $idTalker2 = $idTalker2->getUsername();
+            require_once("formDialogo.php");
+        } 
+    
+    
 }
 
 function validacaoDialogo($idTalker1,$idTalker2) {
