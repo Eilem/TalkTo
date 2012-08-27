@@ -1,45 +1,41 @@
 <?php
+
 require_once("bootstrap.php");
+
 
 listarUsuariosStatus();
 
 function listarUsuariosStatus(){
-    $oUsuario = new Usuario();
-    $oUsuario->setId(1);
-    $oUsuario->setOnLine(1);
+        $idTalker1="";
+        $idTalker2="";
+        $cUsuarios = "";
+        $oUsuario = new Usuario();
+        $oUsuario->setId(4);
+        $oUsuario->setOnLine(1);
+        $oUsuario->isOnLine();
 
-    $oUsuario->isOnLine();
+        // para aparecer o nome do usuario no form
+        $idTalker1 = obterTodosUsuario($oUsuario->getId(4));
+//        $idTalker1 = $oUsuario->obterUsuario();
+        $oTalker = new Talker();
+        $cUsuarios = $oTalker->cUsuarios();
+    
+    if(empty($_POST['usuario2'])){
+        require_once("formTeste.php"); 
+    }else{
+        $idTalker2 = $_POST['usuario2'];
+        $idTalker2 = obterTodosUsuario($idTalker2);
+        
 
-    $oTalker = new Talker();
- 
-    $cUsuarios = $oTalker->cUsuarios();
-
-    foreach($cUsuarios as $oUsuarios){
-        if($oUsuario->getId()!=$oUsuarios->getId()){
-        echo("User: ".$oUsuarios->getUsername()."<br/> OnLine: ".validacaoStatus($oUsuarios->getOnLine())."<br/>");
-        validacaoDialogo($oUsuario->getId(),$oUsuarios->getId());
-        }
-    }
+        $idTalker1 = $idTalker1->getUsername();
+        $idTalker2 = $idTalker2->getUsername();
+        require_once("formDialogo.php");
+    } 
 }
-
 
 function validacaoDialogo($idTalker1,$idTalker2) {
-    if($idTalker1!=$idTalker2){
-        $idUsuarioUltimo = verificarTalkerUltimaMensagem($idTalker1,$idTalker2);
-        echo verificarStatusUsuario($idUsuarioUltimo,$idTalker1,$idTalker2);
-        echo "<p/>";
-    }
-    else{
-        echo "fail";
-        echo "<p/>";
-    }
-}
-
-function obterUsuario($idTalker1) {
-    $oUsuario = new Usuario();
-    $oUsuario->setId($idTalker1);
-    $usuarios = $oUsuario->obterUsuario();
-    return ("Id: ".$usuarios->getId()."<br/> Name:".$usuarios->getUsername()."<br/> Status: ".validacaoStatus($usuarios->getOnLine())."<br/>");
+    $idUsuarioUltimo = verificarTalkerUltimaMensagem($idTalker1,$idTalker2);
+    return verificarStatusUsuario($idUsuarioUltimo,$idTalker1,$idTalker2);
 }
 
 function verificarTalkerUltimaMensagem($idTalker1,$idTalker2){
@@ -48,21 +44,23 @@ function verificarTalkerUltimaMensagem($idTalker1,$idTalker2){
     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
     if($id!=null){
         $oDialogo = $oTalker->obterDialogo($id);
-
             foreach($oDialogo->getCMensagens() as $oMensagem){
                 $idUsuarioUltimo = $oMensagem->getIdUsuario();
             }
         return $idUsuarioUltimo;
-    }
-    return 0;
+    }   
 }
 
 function verificarStatusUsuario($idUsuarioUltimo,$idTalker1){
-    if($idUsuarioUltimo==$idTalker1 ){
-        return "Aguardando resposta";
-    }else{
-        return "Deve resposta";
+    if($idUsuarioUltimo!=null){
+        if($idUsuarioUltimo==$idTalker1 ){
+            return "Aguardando resposta";
+        }else{
+            return "Deve resposta";
+        }
     }
+    return "";
+    
 }
 
 function validacaoStatus($status) {
@@ -71,5 +69,12 @@ function validacaoStatus($status) {
     }else{
         return "offLine";
     }
+}
+
+function obterTodosUsuario($idTalker) {
+    $oUsuario = new Usuario();
+    $oUsuario->setId($idTalker);
+    $usuarios = $oUsuario->obterUsuario();
+    return $usuarios;
 }
 
