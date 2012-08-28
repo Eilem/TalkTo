@@ -70,11 +70,10 @@ class Usuario{
     }
 
     public function validarUsuario($userId){
-        try{
+        try{            
             $oProxyDAO = new ProxyDAO();
-            $oProxyDAO->validarUsuario($userId);
-            
-        }catch(Exception $erro){
+            return $oProxyDAO->validarUsuario($userId);
+            }catch(Exception $erro){
             echo($erro->getMessage());
         }
     }

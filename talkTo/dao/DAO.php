@@ -179,9 +179,10 @@ class DAO {
    public function validarUsuario($idTalker){
         try {
             $result = mysql_query("SELECT * FROM user WHERE id={$idTalker}");
-            return (bool) mysql_fetch_array($result,MYSQL_ASSOC);
+            $result = mysql_fetch_array($result,MYSQL_ASSOC);
+            return $result['id'];
             
-        }catch(Exception $erro) {
+            }catch(Exception $erro) {
             echo($erro->getMessage());
         }
    }
