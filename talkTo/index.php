@@ -15,7 +15,11 @@
     </head>
     
     <body class="index">
+<<<<<<< HEAD
         <form method="POST" action="controllerLogin.php" class="index" onSubmit="return verificaUsuario(this)">
+=======
+        <form method="POST" action="teste.php" class="index"/>
+>>>>>>> f78d4c164f0505918cfc03ceaa5ac49c46859eeb
         <img src="welcome_talker.jpg"/>
         <h2>Bem vindo ao Talk To!!</h2>
         Usu&aacute;rio <input type="text" name="user" id="user"/>        

@@ -16,4 +16,6 @@ $db = "linkurbano_3";
 $conexao = mysql_connect($servidor,$user,$senha) or die (mysql_error());
  
 //seleciona a base de dados daquela conexão, caso contrário mostra o erro ocorrido
+mysql_set_charset('utf8',$conexao);
 mysql_select_db($db, $conexao) or die(mysql_error());
+
