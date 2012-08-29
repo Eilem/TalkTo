@@ -16,10 +16,10 @@
     
     <body class="index">
         <form method="POST" action="controller.php" class="index" onSubmit="return verificaUsuario(this)">
-        <img src="welcome_talker.jpg"/>
-        <h2>Bem vindo ao Talk To!!</h2>
-        Usu&aacute;rio <input type="text" name="usuario1" id="user"/>
-        <input type="submit" value="Entrar" name="entrar"/>
+            <img src="welcome_talker.jpg"/>
+            <h2>Bem vindo ao Talk To!!</h2>
+            Usu&aacute;rio <input type="text" name="usuario1" id="user"/>
+            <input type="submit" value="Entrar" name="entrar"/>
         </form>
     </body>
 </html>
