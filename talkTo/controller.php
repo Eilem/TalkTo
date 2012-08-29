@@ -90,9 +90,17 @@ function listarUsuariosStatus(){
                 require_once("index.php");
            }
         }
-    }else{
-       require_once("index.php");    
-    }  
+    }else if(!empty($_GET)){
+         if(!empty($_GET['usuario1'])){$idTalker1 = $_GET['usuario1'];}
+         if(!empty($_GET['usuario2'])){$idTalker2 = $_GET['usuario2'];}
+//        echo($idTalker2);
+        
+        echo $dialogo = atualizar($idTalker1, $idTalker2);
+        $idTalker1 = obterTodosUsuario($idTalker1);
+        $idTalker2 = obterTodosUsuario($idTalker2);
+    } else{
+        require_once("index.php");
+    } 
     }catch(Exception $erro){
         echo($erro->getMessage());
     }
