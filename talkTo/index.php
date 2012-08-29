@@ -15,11 +15,11 @@
     </head>
     
     <body class="index">
-        <form method="POST" action="controllerLogin.php" class="index" onSubmit="return verificaUsuario(this)">
+        <form method="POST" action="controller.php" class="index" onSubmit="return verificaUsuario(this)">
         <img src="welcome_talker.jpg"/>
         <h2>Bem vindo ao Talk To!!</h2>
-        Usu&aacute;rio <input type="text" name="user" id="user"/>        
-        <input type="submit" value="Entrar" name="entrar"/> 
+        Usu&aacute;rio <input type="text" name="usuario1" id="user"/>
+        <input type="submit" value="Entrar" name="entrar"/>
         </form>
     </body>
 </html>
