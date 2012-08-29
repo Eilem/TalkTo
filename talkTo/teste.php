@@ -15,7 +15,7 @@ function listarUsuariosStatus(){
             if(!empty($_POST['usuario1'])){
             $idTalker1 = $_POST['usuario1'];
             }
-            $idTalker2 = obterTodosUsuario($idTalker2);
+            $idTalker2 = obterTodosUsuario($idTalker2);  //pq obterTodosUsuario se a função so obtem 1 usuario (o q foi passado por parametro)
             $idTalker1 = obterTodosUsuario($idTalker1);
             $idTalker1 = $idTalker1->getUsername();
             $idTalker2 = $idTalker2->getUsername();
