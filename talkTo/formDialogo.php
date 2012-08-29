@@ -36,7 +36,7 @@
     </head>
     <body>
         <form method="POST" action="controller.php" class="formDialogo" id="teste"/>
-            <h3>VocÃª esta no Talker To!<h3/>
+            <h3>Você esta no Talker To!<h3/>
             <br/>
             <div>
                 <input type="hidden" name="idDialogo" value="<?php if(isset($id)) echo($id);?>"/>
@@ -63,7 +63,7 @@
             <input type="hidden" value="<?php echo $idTalker1->getId() ?>" name="usuario1" id="usuario1"/>
             <input type="hidden" value="<?php echo $idTalker2->getId() ?>" name="usuario2" id="usuario2"/>
             <input type="hidden" value="flag" name="acao"/>
-            <input type="submit" value="Encerrar DiÃ¡logo" name="encerrarDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
+            <input type="submit" value="Encerrar Diálogo" name="encerrarDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
             <input type="submit" value="Sair" name="sair" onclick="clearInterval(interval)" title="Clique aqui para Sair do Di&aacute;logo"/>
 
         </form>

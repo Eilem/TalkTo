@@ -219,7 +219,8 @@ class DAO {
                $oUsuario->setUsername($result["user"]);
                $oUsuario->setOnLine($result["onLine"]);
                
-           return $oUsuario;
+               return $oUsuario;
+               
         }catch(Exception $erro) {
             echo($erro->getMessage());
         }
