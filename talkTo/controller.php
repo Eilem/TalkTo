@@ -20,16 +20,24 @@ function listarUsuariosStatus(){
                 if(!empty($_POST['usuario1'])){
                     $idTalker1 = $_POST['usuario1'];
                 }
+                
+                $dialogo = atualizar($idTalker1, $idTalker2);
+                echo $dialogo;
+                echo "-----------------------------";
                 $idTalker2 = obterTodosUsuario($idTalker2);
                 $idTalker1 = obterTodosUsuario($idTalker1);
                 $idTalker1 = $idTalker1->getId();
                 $idTalker2 = $idTalker2->getId();
+                
+                $dialogo = enviar($idTalker1, $idTalker2);
+                        
 
                 if(!empty($_POST['sair'])){
                     logOff($idTalker1);
                     require_once("index.php");
                 }else
                     if(!empty($_POST['encerrarDialogo'])){
+                        echo "entrou?";
                             encerrarDialogo($idTalker1, $idTalker2);
                             $oUsuario = new Usuario();
                             $oUsuario->setId($idTalker1);
@@ -46,6 +54,7 @@ function listarUsuariosStatus(){
                     }
                     else 
                         if(!empty($_POST['voltar'])){
+                            echo "entrou?";
                             $oUsuario = new Usuario();
                             $oUsuario->setId($idTalker1);
                             $idTalker1 = obterTodosUsuario($oUsuario->getId());
@@ -53,6 +62,7 @@ function listarUsuariosStatus(){
                             $cUsuarios = $oTalker->cUsuarios();
                             require_once("formTalker.php");
                         }
+                        
                     else{
                         $idTalker1 = obterTodosUsuario($idTalker1);
                         $idTalker2 = obterTodosUsuario($idTalker2);
@@ -74,7 +84,6 @@ function listarUsuariosStatus(){
                             $idTalker1 = obterTodosUsuario($oUsuario->getId());
                             $oTalker = new Talker();
                             $cUsuarios = $oTalker->cUsuarios();
-
                             require_once("formTalker.php");
                     }else{
                         throw new Exception("usuario não localizado!");
@@ -92,15 +101,7 @@ function listarUsuariosStatus(){
                 require_once("index.php");
            }
         }
-    }else if(!empty($_GET)){
-         if(!empty($_GET['usuario1'])){$idTalker1 = $_GET['usuario1'];}
-         if(!empty($_GET['usuario2'])){$idTalker2 = $_GET['usuario2'];}
-//        echo($idTalker2);
-        
-        echo $dialogo = atualizar($idTalker1, $idTalker2);
-        $idTalker1 = obterTodosUsuario($idTalker1);
-        $idTalker2 = obterTodosUsuario($idTalker2);
-    } else{
+    }else{
         require_once("index.php");
     } 
     }catch(Exception $erro){
@@ -175,7 +176,6 @@ function obterTodosUsuario($idTalker) {
     }
     
     function atualizar($idTalker1,$idTalker2){
-        
         $oTalker = new Talker();
         $dialogo="";
         try{
@@ -207,9 +207,9 @@ function obterTodosUsuario($idTalker) {
     function enviar($idTalker1, $idTalker2){
         $dialogo="";
         try{
-            
                 if(!empty($_POST['mensagem'])){
                     $mensagem = $_POST['mensagem'];
+                    
                     $oTalker = new Talker();
                     
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
