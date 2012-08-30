@@ -6,7 +6,7 @@
         <script type="text/javascript">
             var xmlhttp;
             
-        var interval = setInterval(function(){myFunction()},1000);
+        var interval = setInterval(myFunction,2000);
             
             function loadXMLDoc(url,cfunc){
                 if (window.XMLHttpRequest){
@@ -36,7 +36,7 @@
     </head>
     <body>
         <form method="POST" action="controller.php" class="formDialogo" id="teste"/>
-            <h3>Você esta no Talker To!<h3/>
+            <h3>Voce esta no Talker To!<h3/>
             <br/>
             <div>
                 <input type="hidden" name="idDialogo" value="<?php if(isset($id)) echo($id);?>"/>

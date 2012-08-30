@@ -1,4 +1,5 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
 require_once("Negocio/Dialogo.php");
 require_once("Negocio/Mensagem.php");
 require_once("Negocio/Talker.php");
