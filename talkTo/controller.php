@@ -45,11 +45,13 @@ function listarUsuariosStatus(){
                         require_once("formDialogo.php");
                     }
                     else 
-                        if(!empty($_POST['atualizar'])){
-                            $dialogo = atualizar($idTalker1, $idTalker2);
-                            $idTalker1 = obterTodosUsuario($idTalker1);
-                            $idTalker2 = obterTodosUsuario($idTalker2);
-                            require_once("formDialogo.php");
+                        if(!empty($_POST['voltar'])){
+                            $oUsuario = new Usuario();
+                            $oUsuario->setId($idTalker1);
+                            $idTalker1 = obterTodosUsuario($oUsuario->getId());
+                            $oTalker = new Talker();
+                            $cUsuarios = $oTalker->cUsuarios();
+                            require_once("formTalker.php");
                         }
                     else{
                         $idTalker1 = obterTodosUsuario($idTalker1);
@@ -75,7 +77,7 @@ function listarUsuariosStatus(){
 
                             require_once("formTalker.php");
                     }else{
-                        throw new Exception("usuario n√£o localizado!");
+                        throw new Exception("usuario n„o localizado!");
                     } 
                 }  
                 else{
@@ -180,16 +182,16 @@ function obterTodosUsuario($idTalker) {
                 $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                 $id2 = $oTalker->obterDialogosDeTalkers($idTalker2,$idTalker1);
                 if($id!=null){
-                    $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a fun√ß√£o? o $id j√° possui o id do dialogo^
-                    $oDialogo = $oTalker->obterDialogo($id); // n√£o √© preciso instanciar o objeto $oDialogo??
+                    $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a funÁ„o? o $id j· possui o id do dialogo^
+                    $oDialogo = $oTalker->obterDialogo($id); // n„o È preciso instanciar o objeto $oDialogo??
 
                     foreach($oDialogo->getCMensagens() as $oMensagem){
                             $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
                     }
                 }
                 if($id2!=null){
-                    $id2 = $oTalker->obterDialogosDeTalkers($idTalker2,$idTalker1);//pq repete a fun√ß√£o? o $id j√° possui o id do dialogo^
-                    $oDialogo = $oTalker->obterDialogo($id2); // n√£o √© preciso instanciar o objeto $oDialogo??
+                    $id2 = $oTalker->obterDialogosDeTalkers($idTalker2,$idTalker1);//pq repete a funÁ„o? o $id j· possui o id do dialogo^
+                    $oDialogo = $oTalker->obterDialogo($id2); // n„o È preciso instanciar o objeto $oDialogo??
 
                     foreach($oDialogo->getCMensagens() as $oMensagem){
                             $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
@@ -213,15 +215,15 @@ function obterTodosUsuario($idTalker) {
                     $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);
                     $id2 = $oTalker->obterDialogosDeTalkers($idTalker2,$idTalker1);
                     if($id!=null){
-                        $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a fun√ß√£o? o $id j√° possui o id do dialogo^
-                        $oDialogo = $oTalker->obterDialogo($id); // n√£o √© preciso instanciar o objeto $oDialogo??
+                        $id = $oTalker->obterDialogosDeTalkers($idTalker1,$idTalker2);//pq repete a funÁ„o? o $id j· possui o id do dialogo^
+                        $oDialogo = $oTalker->obterDialogo($id); // n„o È preciso instanciar o objeto $oDialogo??
 
                         foreach($oDialogo->getCMensagens() as $oMensagem){
                                 $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
                         }
                     }else if ($id2!=null){
-                        $id2 = $oTalker->obterDialogosDeTalkers($idTalker2,$idTalker1);//pq repete a fun√ß√£o? o $id j√° possui o id do dialogo^
-                        $oDialogo = $oTalker->obterDialogo($id2); // n√£o √© preciso instanciar o objeto $oDialogo??
+                        $id2 = $oTalker->obterDialogosDeTalkers($idTalker2,$idTalker1);//pq repete a funÁ„o? o $id j· possui o id do dialogo^
+                        $oDialogo = $oTalker->obterDialogo($id2); // n„o È preciso instanciar o objeto $oDialogo??
 
                         foreach($oDialogo->getCMensagens() as $oMensagem){
                                 $dialogo.= date('d-m H:i',$oMensagem->getDataHora())." - ".$oMensagem->getTexto()."\n";
@@ -273,7 +275,7 @@ function obterTodosUsuario($idTalker) {
             return true;
         }
         else{
-            throw new Exception ("Talker n√£o localizado!! Favor inseir um id v√°lido!");
+            throw new Exception ("Talker n„o localizado!! Favor inseir um id v·lido!");
             return false;
         }
     }

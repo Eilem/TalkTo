@@ -64,6 +64,7 @@
             <input type="hidden" value="<?php echo $idTalker2->getId() ?>" name="usuario2" id="usuario2"/>
             <input type="hidden" value="flag" name="acao"/>
             <input type="submit" value="Encerrar Diálogo" name="encerrarDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
+            <input type="submit" value="Voltar" name="voltar" title="Clique aqui para Voltar"/>
             <input type="submit" value="Sair" name="sair" onclick="clearInterval(interval)" title="Clique aqui para Sair do Di&aacute;logo"/>
 
         </form>
