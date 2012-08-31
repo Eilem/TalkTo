@@ -5,8 +5,7 @@
         <link rel="stylesheet" type="text/css" href="estilo.css">
         <script type="text/javascript">
             var xmlhttp;
-            
-        var interval = setInterval(atualizar,2000);
+            var interval = setInterval(atualizar,2000);
             
             function loadXMLDoc(url,cfunc,dados){
                 if (window.XMLHttpRequest){
@@ -15,33 +14,59 @@
                 else{
                     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
                 }
-                    xmlhttp.onreadystatechange=cfunc;
-                    xmlhttp.open("POST",url,true);
-                    xmlhttp.setRequestHeader('Content-Type','text/xml'); 
-                    xmlhttp.setRequestHeader('encoding','ISO-8859-1'); 
-                    xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xmlhttp.setRequestHeader('Content-length', dados.length ); 
-                    
-                    xmlhttp.send(dados);
-               }
-            
-            function enviarMensagem(){
+                xmlhttp.onreadystatechange=cfunc;
+                xmlhttp.open("POST",url,true);
+                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+
+                xmlhttp.send(dados);
+           }
+           
+           function enviarMensagem(){
                 var usuario1 = "usuario1="+document.getElementById('usuario1').value;
                 var usuario2 = "&usuario2="+document.getElementById('usuario2').value;
                 var mensagem = "&mensagem="+document.getElementById('texto').value;
                 var enviar = "&enviar="+document.getElementById('enviar').value;
                 var dados = usuario1+usuario2+mensagem+enviar;
+                document.getElementById("texto").value=null;
                 send(dados);
                 
             }
             
-            
             function atualizar(){
                 var usuario1 = "usuario1="+document.getElementById('usuario1').value;
                 var usuario2 = "&usuario2="+document.getElementById('usuario2').value;
-                var dados = usuario1+usuario2;
+                var dados = usuario1+usuario2;           
                 send(dados);
             }
+            
+            function onClickSair(){
+                var usuario1 = "usuario1="+document.getElementById('usuario1').value;
+                var usuario2 = "&usuario2="+document.getElementById('usuario2').value;
+                var sair = "&sair="+document.getElementById('sair').value;
+                var dados = usuario1+usuario2+sair;
+                window.location.href="index.php";
+                
+                send(dados);
+            }
+//            function encerrarDialogo(){
+//                var usuario1 = "usuario1="+document.getElementById('usuario1').value;
+//                var usuario2 = "&usuario2="+document.getElementById('usuario2').value;
+//                var encerrarDialogo = "encerrarDialogo="+document.getElementById('encerrarDialogo').value;
+//                var dados = usuario1+usuario2+encerrarDialogo;
+//                alert(dados);
+//                
+//                send(dados);
+//            }
+//            function voltarForm(){
+//                var usuario1 = "usuario1="+document.getElementById('usuario1').value;
+//                var usuario2 = "&usuario2="+document.getElementById('usuario2').value;
+//                var voltar = "&voltar="+document.getElementById('voltar').value;
+//                var dados = usuario1+usuario2+voltar;
+//                alert(dados);
+//                
+//                send(dados);
+//                window.location.href="formTalker.php";
+//            }
             
             function send(dados){
                 loadXMLDoc("controller.php",retorno,dados); 
@@ -67,20 +92,20 @@
                 User 2<input type="text" name="idTalker2" value="<?php if(isset($idTalker2)) echo($idTalker2->getUsername());?>"/>
             </div>            
             <div>
-                <textarea name="mensagens" id="textarea"readonly></textarea>
+                <textarea name="mensagens" id="textarea" readonly></textarea>
             </div>
             <br/>
             <div>
-                <input type="text" name="mensagem" id="texto" />
+                <input type="text" name="mensagem" id="texto" onchange="enviarMensagem()" />
+
             </div>
             <br/>
-            <input type="submit" value="Enviar Mensagem" name="enviar" onclick="enviarMensagem()"title="Clique aqui para enviar sua mensagem!"/>  
+            <input type="button" value="Enviar Mensagem" name="enviar" id="enviar" onclick="enviarMensagem()"  title="Clique aqui para enviar sua mensagem!"/>  
             <input type="hidden" value="<?php echo $idTalker1->getId() ?>" name="usuario1" id="usuario1"/>
             <input type="hidden" value="<?php echo $idTalker2->getId() ?>" name="usuario2" id="usuario2"/>
-            <input type="hidden" value="flag" name="acao"/>
-            <input type="submit" value="Encerrar Diálogo" name="encerrarDialogo" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
-            <input type="submit" value="Voltar" name="voltar" title="Clique aqui para Voltar"/>
-            <input type="button" value="Sair" name="sair" onclick="clearInterval(interval)" title="Clique aqui para Sair do Di&aacute;logo"/>
+<!--            <input type="button" value="Encerrar DiÃ¡logo" id="encerrarDialogo" name="encerrarDialogo" onclick="encerrarDialogo()" title="Clique aqui para Encerrar este Di&aacute;logo!!"/>
+            <input type="button" value="Voltar" name="voltar" id="voltar" onclick="voltarForm()" title="Clique aqui para Voltar"/>-->
+            <input type="button" value="Sair" name="sair" id="sair" onclick="onClickSair(),clearInterval(interval)" title="Clique aqui para Sair do Di&aacute;logo"/>
 
         </form>
     </body>
