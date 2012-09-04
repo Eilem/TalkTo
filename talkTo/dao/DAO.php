@@ -162,10 +162,10 @@ class DAO {
    
    public function encerrarDialogo($talker1, $talker2){
        try{
-           $result = mysql_query("UPDATE dialogo
-                                  SET status=0
-                                  WHERE talker1={$talker1} AND talker2={$talker2} AND status=1
-                                  ");
+           $result = mysql_query("UPDATE  dialogo 
+                                  SET  finalizadoPor ={$talker1},status=0 
+                                  WHERE  talker1={$talker1} AND talker2={$talker2} AND status=1"
+                                );
             if($result){
                 return TRUE;
             }else{
